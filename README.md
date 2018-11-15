@@ -78,7 +78,7 @@ app = Flask(__name__)	# flask 객체를 만드는 과정인데 그냥 기본적�
 # "/index.nhn"과 같이 뒷부분을 바꿔주면 페이지가 이동하게 되고 바뀌는 페이지를 지정할 주소를 정해주는 것입니다.
 # "/"의 경우는 기본적으로 "root" 페이지라고 하고 실행했을 때 가장 먼저 나오는 페이지입니다.
 @app.route("/")	
-def hello():	# "/" (root 페이지)에서 실행할 함수 정의 (이것도 flask의 기본 틀입니다.)
+def hello():		# "/" (root 페이지)에서 실행할 함수 정의 (이것도 flask의 기본 틀입니다.)
     return "hello"	# "/" 페이지에서 "hello"를 출력할 것이다
 
 if __name__ == '__main__':	# 솔직히 이건 없어도 되긴 하는거 같습니다..
@@ -110,6 +110,23 @@ app.run()	# 서버 실행
 
 ## 4) 간단한 예시
 
+### 1. Github에서 ZIP 파일로 전체 압축폴더 다운받기
+
+- [Github 접속](https://github.com/statKim/Webproject-with-flask)
+- `Clone or download` 버튼 클릭
+
+![git_status_sequence](img/gitcapture1.png)
+
+- `Download ZIP` 버튼 클릭
+
+![git_status_sequence](img/gitcapture2.png)
+
+- PyCharm으로 실행하여 확인
+
+
+
+### 2. 그냥 코드 복사해서 사용하기
+
 - app.py
 
 ```python
@@ -138,3 +155,50 @@ app.run()
 ```
 
 - templates 폴더 내에 "index.html" 파일 만들기
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>포털 사이트 검색</title>
+</head>
+<body>
+    <h1>Search Naver</h1>
+    <form action="https://search.naver.com/search.naver">
+        <input type="text" name="query">
+        <input type="submit">
+    </form>
+    
+    <h1>Search Daum</h1>
+    <form action="https://search.daum.net/search">
+        <input type="text" name="q">
+        <input type="submit">
+    </form>
+    
+    <h1>Search Google</h1>
+    <form action="https://www.google.com/search">
+        <input type="text" name="q">
+        <input type="submit">
+    </form>
+</body>
+</html>
+```
+
+
+
+### 3. 결과 확인
+
+- "http://127.0.0.1:5000/"
+
+![git_status_sequence](img/hello.png)
+
+- "http://127.0.0.1:5000/다섯명"
+
+![git_status_sequence](img/hello2.png)
+
+- "http://127.0.0.1:5000/show"
+
+![git_status_sequence](img/show.png)
