@@ -90,7 +90,7 @@ if __name__ == '__main__':	# app.py가 main 프로그램인지 확인하는 기�
 
   ![git_status_sequence](img/hello.PNG)
 
-  > 참고로 본인의 Window 계정명이 **한글**일 경우에는 **'utf-8' decoder error**가 뜨고 실행되지 않습니다.
+  > 참고로 본인의 Window 계정명(or 컴퓨터 이름)이 **한글**일 경우에는 **'utf-8' decoder error**가 뜨고 실행되지 않습니다.
 
 ![git_status_sequence](img/decode_error.PNG)
 
