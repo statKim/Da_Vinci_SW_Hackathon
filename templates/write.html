@@ -26,106 +26,13 @@
 
   </head>
   <style>
-    #bor{
-      text-align:center;
-      height:20px;
-      font-size:40px;
-    }
-    div.onboard{
-    background-color: #d4d4d4}
-    
-    .w3-image {-webkit-filter: opacity(200%);}
-    
-    #box1 { text-align: center; } /* 게시판 글씨 중간 위치 */
-    
-    
-    /* <header class="w3-display-container w3-content w3-center"
-    		style="max-width: 1000px"> */
-    
-    .board{font-family: 'Jua', sans-serif;}
-    
-    table.type09 {
-    	border-collapse: collapse;
-    	text-align: left;
-    	line-height: 1.5;
-    }
-    
-    table.type09 thead th {
-    	padding: 10px;
-    	font-weight: bold;
-    	vertical-align: top;
-    	color: #369;
-    	border-bottom: 3px solid #036;
-    }
-    
-    table.type09 tbody th {
-    	width: 150px;
-    	padding: 10px;
-    	font-weight: bold;
-    	vertical-align: top;
-    	border-bottom: 1px solid #ccc;
-    	background: #d4d4d4;
-    }
-    
-    table.type09 td {
-    	width: 350px;
-    	padding: 10px;
-    	vertical-align: top;
-    	border-bottom: 1px solid #ccc;
-    }
-    
-    .button {
-      display: inline-block;
-      border-radius: 4px;
-      background-color: #d4d4d4;
-      border: none;
-      color: #black;
-      text-align: center;
-      font-size: 20px;
-      padding: 10px;
-      width: 150px;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin: 5px;
-      
-    }
-    .button span {
-      cursor: pointer;
-      display: inline-block;
-      position: relative;
-      transition: 0.5s;
-    }
-    .button span:after {
-    content: '\00bb';  /* CSS Entities. To use HTML Entities, use &#8594;*/
-    position: absolute;
-      opacity: 0;
-      top: 0;
-      right: -20px;
-      transition: 0.5s;
-    }
-    .button:hover span {
-      padding-right: 25px;
-    }
-    .button:hover span:after {
-      opacity: 1;
-      right: 0;
-    }
-    
-    body, h1, h2, h3, h4, h5, h6 {
-    	font-family: "Raleway", sans-serif
-    }
-    
-    body, html {
-    	height: 100%;
-    	line-height: 1.8;
-    }
-    /* Full height image header */
-    .bgimg-1 {
-    	background-position: center;
-    	background-size: cover;
-    	background-image: url("img/bg2.png");
-    	min-height: 100%;
-    }
+  	#table{
+  		border-style:none;
+  	}
+  	
+  	#content{
+  		height:300px;
+  	}
   </style>
 
   <body id="page-top">
@@ -173,41 +80,70 @@
         <hr class="star-dark mb-5">
       </div>
 
-	<table align="center">
-		<div class= "onboard">
-		</div>
-		<table class="type09" width="100%">
-			<tr>
-				<th scope="cols" id= "box1">No.</th>
-				<th scope="cols" id= "box1">제목</th>
-				<th scope="cols" id= "box1">글쓴이</th>
-				<th scope="cols" id= "box1">조회수</th>
-				<th scope="cols" id= "box1">날짜</th>
-				<!--<th>내용</th>-->
-				<th scope="cols" id= "box1">변경</th>
-				<th scope="cols" id= "box1">삭제</th>
-			</tr>
-			{% for p in posts %}
-			<tr>
-				<td scope="row">{{ p.id }}</td></td>
-				<td scope="row"><a href="/readpost/{{ p.id }}">{{ p.title }}</a></td>
-				<td scope="row">{{ p.name }}</td>
-				<td scope="row"><%=rows[i].hit%></td>
-				<td scope="row"><%=rows[i].moddate%></td>
-				<td scope="row"><a href="#">변경</a></td>
-				<td scope="row"><a href="/delete/{{ p.id }}">삭제</a></td>
-			</tr>
-			{% endfor %}
-		</table>
-		<br><br>
-		<form method="get" action="/write" align=right >
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">글쓰기</button>
-      </div>		
-		<!--	<button class="button" type= "submit" style="vertical-align: middle;">
-			<span>글쓰기 &#8594;</span></button>-->
-		</form>
-    </section>
+      <form id="form" action="/create" onsubmit="onWriteSubmit()">
+        <table align="center" id="table">
+          <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" id="title" size=50 required /></td>
+          </tr>
+          <tr>
+            <th>글쓴이</th>
+            <td><input type="text" name="name" id="name" required/></td>
+          </tr>
+          <tr>
+            <th>비밀번호</th>
+            <td><input type="password" name="password" id="password" required/></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea cols="50" role="12" name="content" id="content" required></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="right"><input type="submit" value="등록"></td>
+          </tr>
+        </table>
+      </form>
+    <script>
+      function onWriteSubmit()
+      {
+        if ( $("#writer").val().trim() == "" )
+        {
+          var message = "아이디를 입력해 주세요";
+          $("#writer").val("");
+          $("#writer").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#title").val().trim() == "" )
+        {
+          var message = "제목을 입력해 주세요";
+          $("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#content").val().trim() == "" )
+        {
+          var message = "본문 내용을 입력해 주세요";
+          $("#content").val("");
+          $("#content").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#password").val().trim() == "" )
+        {
+          var message = "패스워드를 입력해 주세요";
+          $("#password").val("");
+          $("#password").focus();
+          alert(message);
+          return false;
+        }
+      }
+    </script>
+  </section>
 
 
     <!-- About Section -->
