@@ -1,4 +1,4 @@
-import os
+# import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -138,4 +138,5 @@ def create_comment():
     return redirect("/readpost/"+str(post_id))
 
 if __name__ == '__main__':
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
+    # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
+    app.run(debug=True)
