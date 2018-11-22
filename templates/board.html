@@ -190,11 +190,11 @@
 			{% for p in posts %}
 			<tr>
 				<td scope="row">{{ p.id }}</td></td>
-				<td scope="row"><a href="/readpost/{{ p.id }}">{{ p.title }}</a></td>
+				<td scope="row"><a href="/read/{{ p.id }}">{{ p.title }}</a></td>
 				<td scope="row">{{ p.name }}</td>
-				<td scope="row"><%=rows[i].hit%></td>
-				<td scope="row"><%=rows[i].moddate%></td>
-				<td scope="row"><a href="#">변경</a></td>
+				<td scope="row">{{ p.count }}</td>
+				<td scope="row">{{ p.date }}</td>
+				<td scope="row"><a href="/edit/{{ p.id }}">변경</a></td>
 				<td scope="row"><a href="/delete/{{ p.id }}">삭제</a></td>
 			</tr>
 			{% endfor %}

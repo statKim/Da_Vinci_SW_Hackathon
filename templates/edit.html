@@ -26,88 +26,13 @@
 
   </head>
   <style>
-    table.type09{
-    border-style: solid;
-    border-color: #d4d4d4;}
-
-    #box1 { text-align: center; }
-    .board {
-        font-family: 'Jua', sans-serif;
-    }
-    .type09{font-family: 'Nanum Gothic', sans-serif;}
-    .onboard {
-        font-family: 'Nanum Gothic', sans-serif;
-    }
-
-    table.type09 {
-        border-collapse: collapse;
-        text-align: left;
-        line-height: 1.5;
-    }
-
-    table.type09 thead th {
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
-        color: #369;
-        border-bottom: 3px solid #036;
-    }
-
-    table.type09 tbody th {
-        width: 150px;
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-        background: #f3f6f7;
-    }
-
-    table.type09 td {
-        width: 350px;
-        padding: 10px;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .button {
-        display: inline-block;
-        border-radius: 4px;
-        background-color: #d4d4d4;
-        border: none;
-        color: #black;
-        text-align: center;
-        font-size: 20px;
-        padding: 10px;
-        width: 150px;
-        transition: all 0.5s;
-        cursor: pointer;
-        margin: 5px;
-    }
-
-    .button span {
-        cursor: pointer;
-        display: inline-block;
-        position: relative;
-        transition: 0.5s;
-    }
-
-    .button span:after {
-        content: '\00bb'; /* CSS Entities. To use HTML Entities, use &#8594;*/
-        position: absolute;
-        opacity: 0;
-        top: 0;
-        right: -20px;
-        transition: 0.5s;
-    }
-
-    .button:hover span {
-        padding-right: 25px;
-    }
-
-    .button:hover span:after {
-        opacity: 1;
-        right: 0;
-    }
+  	#table{
+  		border-style:none;
+  	}
+  	
+  	#content{
+  		height:300px;
+  	}
   </style>
 
   <body id="page-top">
@@ -149,65 +74,101 @@
       </div>
     </header>
 
-    <!-- 게시글 보는 부분 -->
     <section class="portfolio" id="portfolio">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">게시판</h2>
         <hr class="star-dark mb-5">
       </div>
-    	<table class="type09">
-    		<tr>
-    			<th  id= "box1">번호</th>
-    			<td>{{ post.id }}</td>
-    			<th  id= "box1">조회수</th>
-    			<td>{{ post.count }}</td>
-    			<th  id= "box1">글쓴이</th>
-    			<td>{{ post.name }}</td>
-    		</tr>
-    		<tr>
-    			<th id= "box1">제목</th>
-    			<td colspan="5">{{ post.title }}</td>
-    		</tr>
-    		<tr>
-    			<th id= "box1">작성일</th>
-    			<td colspan="2">{{ post.date }}</td>
-    			<th id= "box1">수정일</th>
-    			<td colspan="2">{{ post.date_update }}</td>
-    		</tr>
-    		<tr>
-    			<td colspan="6" height="400" class="inboard">{{ post.content }}</td>
-    		</tr>
-    		<!-- 댓글 보는 부분 -->
-    	  {% for c in comment %}
-    	    {% if c.post_id == post.id %}
-        		<tr>
-        			<th id= "box1">{{ c.name }}</th>
-        			<td colspan="5">{{ c.content }}</td>
-        		</tr>
-          {% endif %}
-        {% endfor %}    		
-        <!-- 댓글 쓰는 부분 -->
-        <tr>
-          <form action="/create_comment">
-            <th id= "box1"><input type="text" name="name" placeholder="이름"></th>
-            <td colspan="4"><input type="text" name="comment_content" style="width:800px;" placeholder="댓글"></td>
-            <td>
-              <input type="hidden" name="post_id" value="{{ post.id }}">
-              <button type="submit">등록</button>
-            </td>
-          </form>
-        </tr>
-    		<tr>
-    			<td colspan="6">
-    				<form method="get" action="/board">
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">목록</button>
-              </div>
-    				</form>
-    			</td>
-    		</tr>
-    	</table>
-    </section>
+
+      <form id="form" action="/update/{{ post.id }}" onsubmit="onWriteSubmit()">
+        <table align="center" id="table">
+          <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" id="title" size=50 value="{{ post.title }}"></td>
+          </tr>
+          <tr>
+            <th>글쓴이</th>
+            <td><input type="text" name="name" id="name" value="{{ post.name }}"></td>
+          </tr>
+          <tr>
+            <th>비밀번호</th>
+            <td><input type="password" name="password" id="password" required/></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><textarea cols="50" role="12" name="content" id="content">{{ post.content }}</textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="right"><input type="submit" value="등록"></td>
+          </tr>
+        </table>
+      </form>
+    <script>
+      function onWriteSubmit()
+      {
+        if ( $("#writer").val().trim() == "" )
+        {
+          var message = "아이디를 입력해 주세요";
+          $("#writer").val("");
+          $("#writer").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#title").val().trim() == "" )
+        {
+          var message = "제목을 입력해 주세요";
+          $("#title").val("");
+          $("#title").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#content").val().trim() == "" )
+        {
+          var message = "본문 내용을 입력해 주세요";
+          $("#content").val("");
+          $("#content").focus();
+          alert(message);
+          return false;
+        }
+  
+        if ( $("#password").val().trim() == "" )
+        {
+          var message = "패스워드를 입력해 주세요";
+          $("#password").val("");
+          $("#password").focus();
+          alert(message);
+          return false;
+        }
+      }
+    </script>
+  </section>
+
+
+    <!-- About Section -->
+<!--    <section class="bg-primary text-white mb-0" id="about">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-white">About</h2>
+        <hr class="star-light mb-5">
+        <div class="row">
+          <div class="col-lg-4 ml-auto">
+            <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+          </div>
+          <div class="col-lg-4 mr-auto">
+            <p class="lead">Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a class="btn btn-xl btn-outline-light" href="#">
+            <i class="fas fa-download mr-2"></i>
+            Download Now!
+          </a>
+        </div>
+      </div>
+    </section>-->
+
+
 
     <!-- Footer -->
     <footer class="footer text-center">
