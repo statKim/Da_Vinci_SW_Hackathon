@@ -132,7 +132,7 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board">게시판</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/1">게시판</a>
             </li>
           </ul>
         </div>
@@ -155,58 +155,62 @@
         <h2 class="text-center text-uppercase text-secondary mb-0">게시판</h2>
         <hr class="star-dark mb-5">
       </div>
-    	<table class="type09">
-    		<tr>
-    			<th  id= "box1">번호</th>
-    			<td>{{ post.id }}</td>
-    			<th  id= "box1">조회수</th>
-    			<td>{{ post.count }}</td>
-    			<th  id= "box1">글쓴이</th>
-    			<td>{{ post.name }}</td>
-    		</tr>
-    		<tr>
-    			<th id= "box1">제목</th>
-    			<td colspan="5">{{ post.title }}</td>
-    		</tr>
-    		<tr>
-    			<th id= "box1">작성일</th>
-    			<td colspan="2">{{ post.date }}</td>
-    			<th id= "box1">수정일</th>
-    			<td colspan="2">{{ post.date_update }}</td>
-    		</tr>
-    		<tr>
-    			<td colspan="6" height="400" class="inboard">{{ post.content }}</td>
-    		</tr>
-    		<!-- 댓글 보는 부분 -->
-    	  {% for c in comment %}
+      <table class="type09" width="90%" align="center">
+    	<tr>
+    		<th  id= "box1">번호</th>
+    		<td>{{ post.id }}</td>
+    		<th  id= "box1">조회수</th>
+    		<td>{{ post.count }}</td>
+    		<th  id= "box1">글쓴이</th>
+    		<td>{{ post.name }}</td>
+    	</tr>
+    	<tr>
+    		<th id= "box1">제목</th>
+    		<td colspan="5">{{ post.title }}</td>
+    	</tr>
+    	<tr>
+    		<th id= "box1">작성일</th>
+    		<td colspan="2">{{ post.date }}</td>
+    		<th id= "box1">수정일</th>
+    		<td colspan="2">{{ post.date_update }}</td>
+    	</tr>
+    	<tr>
+        	<td colspan="6" height="400" class="inboard">{{ post.content }}</td>
+    	</tr>
+    	<!-- 댓글 보는 부분 -->
+    	{% for c in comment %}
     	    {% if c.post_id == post.id %}
         		<tr>
         			<th id= "box1">{{ c.name }}</th>
         			<td colspan="5">{{ c.content }}</td>
         		</tr>
-          {% endif %}
+            {% endif %}
         {% endfor %}    		
         <!-- 댓글 쓰는 부분 -->
         <tr>
-          <form action="/create_comment">
-            <th id= "box1"><input type="text" name="name" placeholder="이름"></th>
-            <td colspan="4"><input type="text" name="comment_content" style="width:800px;" placeholder="댓글"></td>
-            <td>
-              <input type="hidden" name="post_id" value="{{ post.id }}">
-              <button type="submit">등록</button>
-            </td>
-          </form>
+            <form action="/create_comment">
+                <th id= "box1"><input type="text" name="name" placeholder="이름"></th>
+                <td colspan="4"><input type="text" name="comment_content" style="width:800px;" placeholder="댓글"></td>
+                <td>
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <button type="submit">등록</button>
+                </td>
+            </form>
         </tr>
-    		<tr>
-    			<td colspan="6">
-    				<form method="get" action="/board">
-              <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">목록</button>
-              </div>
-    				</form>
-    			</td>
-    		</tr>
-    	</table>
+        <tr>
+            <td colspan="4">
+                <form method="get" action="/board">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">목록</button>
+                    </div>
+                </form>
+    		</td>
+            <td align="right" colspan="2">
+              <button class="btn btn-primary btn-xl" onclick="location.href='/edit/{{ post.id }}'">수정</button>
+              <button class="btn btn-primary btn-xl" onclick="location.href='/delete/{{ post.id }}'">삭제</button>
+            </td>
+        </tr>
+      </table>
     </section>
 
     <!-- Footer -->

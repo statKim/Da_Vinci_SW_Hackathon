@@ -42,13 +42,45 @@ def root():
     return render_template("index.html")
 
 # 게시판 page
-@app.route("/board")
-def board():
+# @app.route("/board")
+# def board():
+#     # myapp.db에 있는 모든 레코드(db의 한 행)를 불러와 보여줌
+#     # select * from posts;
+#     page = request.args.get("page")
+#     posts = Post.query.all()    # 리스트 형태로 반환됨!!
+#     numpage = len(posts) // 10 + 1  # 한 페이지에 10개의 게시글만 오게 하고 나머지지는 다음 쪽수로 넘겨야 볼수 있게!!
+#     numpage = range(1, numpage+1, 1)    # 넘길 때 리스트 형태로 넘김
+#     if len(posts) > 10:
+#         posts = posts[len(posts)-10:len(posts)+1] # 한 페이지에 10개만 보여주기
+#     return render_template("board.html", posts=reversed(posts), numpage=numpage)
+
+# 게시판 page 다음으로 넘길 때!!
+@app.route("/board/<int:page>")
+def board(page):
     # myapp.db에 있는 모든 레코드(db의 한 행)를 불러와 보여줌
     # select * from posts;
-    posts = Post.query.all() # 리스트 형태로 반환됨!!
-    return render_template("board.html", posts=reversed(posts))
-    
+    posts = Post.query.all()    # 리스트 형태로 반환됨!!
+    comments = Comment.query.all()
+    # 게시글에 해당하는 댓글 수 세는 코드
+    comment_count = {}
+    for p in posts:
+        count = 0
+        for c in comments:
+            if p.id == c.post_id:
+                count += 1
+        comment_count[p] = count
+    numpage = len(posts) // 10 + 1  # 한 페이지에 10개의 게시글만 오게 하고 나머지지는 다음 쪽수로 넘겨야 볼수 있게!!
+    numpage = range(1, numpage+1, 1)    # 넘길 때 리스트 형태로 넘김
+    end = (len(posts)+1) - (10*(page - 1))
+    start = end - 10
+    if (len(posts) - 10*page) <= 0:  # 이 페이지가 마지막일 때
+        posts = posts[0:len(posts)-10*(page-1)+1]   # 있는 것까지만 보여주기
+    else:
+        posts = posts[start:end]
+    if len(posts) >= 2:  # 최근것부터 나와야 하기 때문
+        posts = reversed(posts)
+    return render_template("board.html", posts=posts, comment_count=comment_count, numpage=numpage, page=page)
+
 # 게시판 글쓰기 page
 @app.route("/write")
 def write():
@@ -58,9 +90,8 @@ def write():
 @app.route("/create")
 def create():
     # 작성 시간 입력하기 위한 부분
-    now = datetime.now() 
-    time = str(now.hour+9) + ":" + str(now.minute)
-    time = now.strftime("%Y.%m.%d") + " " + datetime.strptime(time, "%H:%M").strftime("%H:%M")
+    now = datetime.now()
+    time = now.strftime("%Y.%m.%d %H:%M")
     # DB에 입력할 값들 입력
     name = request.args.get("name")
     password = request.args.get("password")
@@ -73,7 +104,7 @@ def create():
     db.session.add(post) # 데이터베이스에 내용 추가할거야!(session은 추가할 때마다 부르는 거라고 생각하면 됨)
     db.session.commit() # commit으로 확정시킴!(확실히 저장!)
     # return render_template("create.html", name=name, title=title, content=content)
-    return redirect("/board") # create.html을 거치지 않고 바로 board.html로 오는 방법
+    return redirect("/board/1") # create.html을 거치지 않고 바로 board.html로 오는 방법
 
 # 게시글 수정하는 페이지로 넘어가게 하는 부분
 @app.route("/edit/<int:id>")
@@ -91,9 +122,8 @@ def edit(id):
 @app.route("/update/<int:id>")
 def update(id):
     # 작성 시간 입력하기 위한 부분
-    now = datetime.now() 
-    time = str(now.hour+9) + ":" + str(now.minute)
-    time = now.strftime("%Y.%m.%d") + " " + datetime.strptime(time, "%H:%M").strftime("%H:%M")
+    now = datetime.now()
+    time = now.strftime("%Y.%m.%d %H:%M")
     # 1. 수정하고자 하는 레코드를 선택
     post = Post.query.get(id)
     # 2. 수정한다
@@ -102,18 +132,21 @@ def update(id):
     post.date_update = time
     # 3. 확정하고 DB에 반영한다.
     db.session.commit()    
-    return redirect("/board")
+    return redirect("/board/1")
 
 # 게시글 삭제
 @app.route("/delete/<int:id>") # id를 받아오는데 int로 바로 변환해줌
 def delete(id):
     # 1. 지우려하는 레코드를 선택
     post = Post.query.get(id)
+    comment = Comment.query.filter_by(post_id=id).all()
     # 2. 지운다
     db.session.delete(post)
+    for i in range(len(comment)):
+        db.session.delete(comment[i])
     # 3. 확정하고 DB에 반영한다.
     db.session.commit()
-    return redirect("/board")
+    return redirect("/board/1")
 
 # 게시글 보기
 @app.route("/read/<int:id>")
@@ -135,7 +168,8 @@ def create_comment():
     comment = Comment(name=name, content=content, post_id=post_id)
     db.session.add(comment)
     db.session.commit()
-    return redirect("/readpost/"+str(post_id))
+    return redirect("/read/"+str(post_id))
+
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)

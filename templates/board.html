@@ -150,7 +150,8 @@
               <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a>
             </li>
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board">게시판</a>
+              <!--<input type="hidden" name="page" value=1>-->
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/board/1">게시판</a>
             </li>
           </ul>
         </div>
@@ -172,41 +173,47 @@
         <h2 class="text-center text-uppercase text-secondary mb-0">게시판</h2>
         <hr class="star-dark mb-5">
       </div>
-
-	<table align="center">
-		<div class= "onboard">
-		</div>
-		<table class="type09" width="100%">
-			<tr>
-				<th scope="cols" id= "box1">No.</th>
-				<th scope="cols" id= "box1">제목</th>
-				<th scope="cols" id= "box1">글쓴이</th>
-				<th scope="cols" id= "box1">조회수</th>
-				<th scope="cols" id= "box1">날짜</th>
-				<!--<th>내용</th>-->
+      <table class="type09" width="90%" align="center">
+        <tr>
+		  <th scope="cols" id= "box1">No.</th>
+		  <th scope="cols" id= "box1">제목</th>
+		  <th scope="cols" id= "box1">글쓴이</th>
+		  <th scope="cols" id= "box1">조회수</th>
+		  <th scope="cols" id= "box1">날짜</th>
+				<!--<th>내용</th>
 				<th scope="cols" id= "box1">변경</th>
-				<th scope="cols" id= "box1">삭제</th>
-			</tr>
-			{% for p in posts %}
-			<tr>
-				<td scope="row">{{ p.id }}</td></td>
-				<td scope="row"><a href="/read/{{ p.id }}">{{ p.title }}</a></td>
-				<td scope="row">{{ p.name }}</td>
-				<td scope="row">{{ p.count }}</td>
-				<td scope="row">{{ p.date }}</td>
-				<td scope="row"><a href="/edit/{{ p.id }}">변경</a></td>
-				<td scope="row"><a href="/delete/{{ p.id }}">삭제</a></td>
-			</tr>
-			{% endfor %}
-		</table>
-		<br><br>
-		<form method="get" action="/write" align=right >
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">글쓰기</button>
-      </div>		
+				<th scope="cols" id= "box1">삭제</th>-->
+		</tr>
+		{% for p in posts %}
+            <tr align="center">
+              <td scope="row">{{ p.id }}</td></td>
+              <td scope="row"><a href="/read/{{ p.id }}">{{ p.title }}
+                {% if comment_count[p] != 0 %}
+                 [{{ comment_count[p] }}]
+                {% endif %}
+              </a></td>
+              <td scope="row">{{ p.name }}</td>
+              <td scope="row">{{ p.count }}</td>
+              <td scope="row">{{ p.date }}</td>
+                    <!--<td scope="row"><a href="/edit/{{ p.id }}">변경</a></td>
+                    <td scope="row"><a href="/delete/{{ p.id }}">삭제</a></td>-->
+            </tr>
+        {% endfor %}
+      </table>
+      <br>
+      <table align="center">
+        {% for i in numpage %}
+          <td scope="row"><a href="/board/{{ i }}">{{ i }}</a></td>
+        {% endfor %}
+      </table>
+      <br><br>
+      <form method="get" action="/write" align="right">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">글쓰기</button>
+        </div>
 		<!--	<button class="button" type= "submit" style="vertical-align: middle;">
 			<span>글쓰기 &#8594;</span></button>-->
-		</form>
+      </form>
     </section>
 
 
