@@ -186,7 +186,7 @@
 		</tr>
 		{% for p in posts %}
             <tr align="center">
-              <td scope="row">{{ p.id }}</td></td>
+              <td scope="row">{{ p.id }}</td>`</td>
               <td scope="row"><a href="/read/{{ p.id }}">{{ p.title }}
                 {% if comment_count[p] != 0 %}
                  [{{ comment_count[p] }}]
