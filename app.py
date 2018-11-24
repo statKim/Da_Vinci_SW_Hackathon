@@ -170,6 +170,11 @@ def create_comment():
     db.session.commit()
     return redirect("/read/"+str(post_id))
 
+# 혼잡도 예측 page
+@app.route("/predict")
+def predict():
+    return render_template("predict.html")
+
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
