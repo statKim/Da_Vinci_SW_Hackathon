@@ -173,7 +173,7 @@
     <br><br><br>
     <section class="portfolio" id="portfolio">
       <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">혼잡도 예측</h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">예상 혼잡도</h2>
         <hr class="star-dark mb-5">
       </div>
 	<!--<div id ="toppadding"></div>-->
@@ -184,34 +184,35 @@
 			<!--<tr><td colspan="2" align="center"><img width="800px" style="overray" src = "img/frame.png"></a></td></tr>    &lt;!&ndash; 자러왔다. 이미지  &ndash;&gt;-->
 			<!--<tr><th colspan="2" height="20px"><h2>예상 매출액 예측</h2></th></tr>-->
 			<tr><th align ="left">&emsp;지역(구) </th>
-				<td>
-				<select id="region" name="region">
-					<option value="강남구">강남구</option>
-					<option value="강동구">강동구</option>
-					<option value="강북구">강북구</option>
-					<option value="강서구">강서구</option>
-					<option value="관악구">관악구</option>
-					<option value="광진구">광진구</option>
-					<option value="구로구">구로구</option>
-					<option value="금천구">금천구</option>
-					<option value="노원구">노원구</option>
-					<option value="도봉구">도봉구</option>
-					<option value="동대문구">동대문구</option>
-					<option value="동작구">동작구</option>
-					<option value="마포구">마포구</option>
-					<option value="서대문구">서대문구</option>
-					<option value="서초구">서초구</option>
-					<option value="성동구">성동구</option>
-					<option value="성북구">성북구</option>
-					<option value="송파구">송파구</option>
-					<option value="양천구">양천구</option>
-					<option value="영등포구">영등포구</option>
-					<option value="용산구">용산구</option>
-					<option value="은평구">은평구</option>
-					<option value="종로구">종로구</option>
-					<option value="중구">중구</option>
-					<option value="중랑구">중랑구</option>
-				</select>
+				<td>[월 출력할 부분]&emsp;
+                    <!-- select 부분은 오늘 날짜에 맞게 for문으로 오늘부터 7일 이내까지 표시할 것 -->
+                    <select id="region" name="region">
+                        <option value="강남구">강남구</option>
+                        <option value="강동구">강동구</option>
+                        <option value="강북구">강북구</option>
+                        <option value="강서구">강서구</option>
+                        <option value="관악구">관악구</option>
+                        <option value="광진구">광진구</option>
+                        <option value="구로구">구로구</option>
+                        <option value="금천구">금천구</option>
+                        <option value="노원구">노원구</option>
+                        <option value="도봉구">도봉구</option>
+                        <option value="동대문구">동대문구</option>
+                        <option value="동작구">동작구</option>
+                        <option value="마포구">마포구</option>
+                        <option value="서대문구">서대문구</option>
+                        <option value="서초구">서초구</option>
+                        <option value="성동구">성동구</option>
+                        <option value="성북구">성북구</option>
+                        <option value="송파구">송파구</option>
+                        <option value="양천구">양천구</option>
+                        <option value="영등포구">영등포구</option>
+                        <option value="용산구">용산구</option>
+                        <option value="은평구">은평구</option>
+                        <option value="종로구">종로구</option>
+                        <option value="중구">중구</option>
+                        <option value="중랑구">중랑구</option>
+                    </select>일
 			</td></tr>
 			<tr><th align="left" >&emsp;상주인구수 </th>
 				<td ><input type ="text" id ="livingPeople" name ="livingPeople" size=40 required placeholder="상주인구수를 입력하세요. (1~19310)"></td></tr>
@@ -232,7 +233,7 @@
 			<!--<tr><td></td></tr>-->
 			<tr><td colspan="2" align="center">
               <!--<input  id ="predict" name="predict" type ="image" src="img/singup.png" value="예상">-->
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">글쓰기</button>
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">예상!!</button>
             </td></tr>
 			<!--<tr><td colspan="2" align="center"><img width="800px" src = "img/frame2.png"></td></tr>-->
 		</table>
