@@ -1,5 +1,5 @@
 # import os
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, json
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import requests
@@ -102,13 +102,8 @@ def create():
 # 게시글 수정하는 페이지로 넘어가게 하는 부분
 @app.route("/edit/<int:id>")
 def edit(id):
-    # 1. 수정하고자 하는 레코드를 선택
+    # 수정하고자 하는 레코드를 선택
     post = Post.query.get(id)
-    # 2. 수정한다
-    #post.title = "수정해라!"
-    #post.content = "수정내용!"
-    # 3. 확정하고 DB에 반영한다.
-    #db.session.commit()
     return render_template("edit.html", post=post)
 
 # 게시글 update
@@ -128,7 +123,7 @@ def update(id):
     return redirect("/board/1")
 
 # 게시글 삭제
-@app.route("/delete/<int:id>") # id를 받아오는데 int로 바로 변환해줌
+@app.route("/delete/<int:id>")  # id를 받아오는데 int로 바로 변환해줌
 def delete(id):
     # 1. 지우려하는 레코드를 선택
     post = Post.query.get(id)
@@ -191,16 +186,30 @@ def predict():
         danger = False
     return render_template("predict.html", month=month, day=day, day_next=day_next, danger=danger)
 
-@app.route("/prediction", methods=["POST"])
+# 혼잡도 예측 결과 페이지
+@app.route("/prediction", methods=["POST"]) # form태그랑 route 모두 post로 하면 post
 def prediction():
-    value = request.form['region']
+    place = request.form["place"]
+    month = request.form["month"]
+    if int(month) == datetime.now().month:   # select 태그로 받아온 월이 이번달이면
+        day = request.form["day"]
+    else:
+        day = request.form["day_next"]
+    value = month + "\n" + day + "\n" + place
     return value
-    # return render_template("prediction.html")
 
-@app.route("/testing")
-def testing():
-    all_args = "제발 성공 좀 ㅠㅠ"
-    return jsonify(all_args)
+# Ajax test용
+@app.route("/ajaxtest")
+def ajaxtest():
+    return render_template("ajaxTest.html")
+
+# 메인 페이지에서 Ajax 이용하여 비동기로 예측 결과 출력
+@app.route("/testing/<string:val>/<string:val2>/<string:val3>/<string:val4>")
+def testing(val, val2, val3, val4):
+    all_args = "서버값 받기 성공!!"
+    all_args = val + val2 + val3 + val4
+    return json.dumps({'status': all_args})
+
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)

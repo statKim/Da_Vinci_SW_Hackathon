@@ -33,13 +33,13 @@
 
         if(obj == {{ month[0] }}) {
 
-            f.SUB1.style.display = "";
-            f.SUB2.style.display = "none";
+            f.day.style.display = "";
+            f.day_next.style.display = "none";
 
         } else {
 
-            f.SUB1.style.display = "none";
-            f.SUB2.style.display = "";
+            f.day.style.display = "none";
+            f.day_next.style.display = "";
 
          }
     }
@@ -199,41 +199,42 @@
 	<!--<div id ="toppadding"></div>-->
 
 		<div>
+        <!--<form method="post" action="/prediction"> &lt;!&ndash; 서버로 데이터 넘기는 form &ndash;&gt;-->
 		<table align="center">
 			<tr><th align ="left">&emsp;날짜&emsp; </th>
 				<td>
                   <form name="select_month">
                     {% if danger == True %}
                       <!-- 상위 셀렉트 -->
-                      <select name=" " onChange="showSub(this.options[this.selectedIndex].value);">
+                      <select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">
                         {% for m in month %}
                           <option value="{{ m }}">{{ m }}
                         {% endfor %}
                       </select>월&emsp;
                       <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="SUB1" style="display: ;">
+                      <select id="day" name="day" style="display: ;">
                         {% for d in day %}
                           <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                        </select>
                       <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="SUB2" style="display: none;">
+                      <select id="day_next" name="day_next" style="display: none;">
                         {% for dn in day_next %}
                           <option value="{{ dn }}">{{ dn }}</option>
                         {% endfor %}
                       </select>일
                     {% else %}
-                      <select name=" " onChange="showSub(this.options[this.selectedIndex].value);">
+                      <select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">
                           <option value="{{ month[0] }}">{{ month[0] }}
                       </select>월&emsp;
                       <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="SUB1" style="display: ;">
+                      <select id="day" name="day" style="display: ;">
                         {% for d in day %}
                           <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                       </select>
                       <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="SUB2" style="display: none;">
+                      <select id="day_next" name="day_next" style="display: none;">
                         {% for dn in day_next %}
                           <option value="{{ dn }}">{{ dn }}</option>
                         {% endfor %}
@@ -242,55 +243,57 @@
                   </form>
 			    </td></tr>
 			<tr><th align="left">&emsp;장소&emsp; </th>
-				<td ><input type ="text" id= "numberStore" name ="numberStore" size=40 required placeholder="유사점포수를 입력하세요. (1~51)"></td></tr>
-			<!--<tr><th align ="left">&emsp;휴일유무  </th>-->
-				<!--<td ><input type ="text" id ="workingPeople" name ="workingPeople" size=40 required placeholder="직장인구수를 입력하세요. (2~19502)"></td></tr>-->
-			<!--<tr><th align ="left">&emsp;유동인구수  </th>-->
-				<!--<td ><input type ="text" id="movingPeople" name ="movingPeople" size=40 required placeholder="유동인구수를 입력하세요. (54~612074)"></td></tr>-->
-			<!--<tr><td colspan ="2"></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<!--<tr><td></td></tr>-->
-			<tr><td colspan="2" align="center">
-              <br>
-              <!--<input  id ="predict" name="predict" type ="image" src="img/singup.png" value="예상">-->
-              <form method="post" action="/prediction" > <!-- 서버로 데이터 넘기는 form -->
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">예상!!</button>
-                </form>
-            </td></tr>
-			<!--<tr><td colspan="2" align="center"><img width="800px" src = "img/frame2.png"></td></tr>-->
+				<td >
+                  <select id="place" name="place">
+                    <option value="롯데월드">롯데월드</option>
+                    <option value="어린이대공원">어린이대공원</option>
+                    <option value="남산">남산</option>
+                    <option value="덕수궁">덕수궁</option>
+                    <option value="경복궁">경복궁</option>
+                    <option value="북촌한옥마을">북촌한옥마을</option>
+                  </select>
+                </td>
+            </tr>
+			<tr>
+              <td colspan="2" align="center">
+                <br>
+                <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                <br>
+                <!--<input id="result" >-->
+                <div id="result"></div>
+              </td>
+            </tr>
 		</table>
+        <!--</form>-->
 		</div>
-
     </section>
+    <!-- Ajax javascript -->
+    <script type="text/javascript">
+		function ajaxReq() {
+		  var xhttp = new XMLHttpRequest();
 
+          // "/testing" 라우터로 넘김, 2개의 값을 "/"로 구분하여 보냄
+          url = "testing/"+document.getElementById('month').value + "/" + document.getElementById('day').value
+          url = url + "/" + document.getElementById('day_next').value + "/" + document.getElementById('place').value
+		  xhttp.open("GET", url, true); //true : 비동기
+		  xhttp.send();
 
-    <!-- About Section -->
-<!--    <section class="bg-primary text-white mb-0" id="about">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-white">About</h2>
-        <hr class="star-light mb-5">
-        <div class="row">
-          <div class="col-lg-4 ml-auto">
-            <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-          </div>
-          <div class="col-lg-4 mr-auto">
-            <p class="lead">Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            <i class="fas fa-download mr-2"></i>
-            Download Now!
-          </a>
-        </div>
-      </div>
-    </section>-->
+          // 서버에서 값 받아오는 함수 => xhttp.send() 이후에 자동 실행됨
+		  xhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+		    	var val = this.responseText  //responseText가 데이터!!
+		    	alert(val)
+		    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
+		    	document.getElementById('result').innerHTML = JSON.parse(val)["status"]; // div에 값 넣기
+		    }
+		  };
+		}
+	</script>
+
 
 
     <!-- Footer -->
@@ -309,34 +312,34 @@
             <h4 class="text-uppercase mb-4">친구들과 공유하기</h4>
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://plus.google.com/">
                   <i class="fab fa-fw fa-google-plus-g"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://twitter.com/">
                   <i class="fab fa-fw fa-twitter"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/">
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://line.me/">
                   <i class="fab fa-line"></i>
                 </a>
               </li>
             </ul>
           </div>
           <div class="col-md-4">
-            <h4 class="text-uppercase mb-4">About 다섯 명</h4>
+            <h4 class="text-uppercase mb-4">made by 다섯 명</h4>
             <p class="lead mb-0">서지완 김승윤 김현성 <br> 안지현&nbsp; 최나해 <br></p>
           </div>
         </div>

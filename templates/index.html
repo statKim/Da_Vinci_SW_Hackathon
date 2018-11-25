@@ -258,27 +258,27 @@
             <h4 class="text-uppercase mb-4">친구들과 공유하기</h4>
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.facebook.com/">
                   <i class="fab fa-fw fa-facebook-f"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://plus.google.com/">
                   <i class="fab fa-fw fa-google-plus-g"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://twitter.com/">
                   <i class="fab fa-fw fa-twitter"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://www.instagram.com/">
                   <i class="fab fa-fw fa-instagram"></i>
                 </a>
               </li>
               <li class="list-inline-item">
-                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                <a class="btn btn-outline-light btn-social text-center rounded-circle" href="https://line.me/">
                   <i class="fab fa-line"></i>
                 </a>
               </li>
@@ -318,30 +318,33 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">롯데월드</h2>
               <hr class="star-dark mb-5">
+              <!-- 다음 지도 -->
+              <!--<div class="showmap">-->
+                <!--<div class="map" id="map" style="width:750px;height:400px;"></div>-->
+                <!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=185cbfef32b3cdb5d789a63d3c0db1e7"></script>-->
+                <!--<script>-->
+                    <!--var container = document.getElementById('map');-->
+                    <!--var options = {-->
+                        <!--center: new daum.maps.LatLng(33.450701, 126.570667),-->
+                        <!--level: 3-->
+                    <!--};-->
+                    <!--var map = new daum.maps.Map(container, options);-->
+                    <!--map.style.width = '650px';-->
+                    <!--map.style.heght = '650px';-->
+                <!--</script>-->
+              <!--</div>-->
+              <img class="img-fluid mb-5" src="../static/img/portfolio/lotte.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>{{ time }} ~ {{ time2 }}</h3>
-              <!-- 다음 지도 -->
-              <div class="showmap">
-                <div class="map" id="map" style="width:750px;height:400px;"></div>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=185cbfef32b3cdb5d789a63d3c0db1e7"></script>
-                <script>
-                    var container = document.getElementById('map');
-                    var options = {
-                        center: new daum.maps.LatLng(33.450701, 126.570667),
-                        level: 3
-                    };
-                    var map = new daum.maps.Map(container, options);
-                    map.style.width = '650px';
-                    map.style.heght = '650px';
-                </script>
-              </div>
-              <!--<img class="img-fluid mb-5" src="../static/img/portfolio/cabin.png" alt="">-->
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                             <!-롯데월드사이트연결>
-              <p class="lead mb-0">요 버튼을
-               <a href="https://mticket.lotteworld.com/web/pdt/productList.do?ei_gsber=1210&amp;ei_bukrs=1200">클릭</a>.</p>
-              <br/>
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
+              <br>
+              <h2 class="text-uppercase mb-0">예매 사이트로 이동</h2>                             <!-롯데월드사이트연결>
+              <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="https://mticket.lotteworld.com/web/pdt/productList.do?ei_gsber=1210&amp;ei_bukrs=1200">클릭</a>-->
+              <button class="btn btn-primary btn-xl" onclick="location.href='https://mticket.lotteworld.com/web/pdt/productList.do?ei_gsber=1210&amp;ei_bukrs=1200'">클릭</button>
+              <!--</p>-->
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/lotteworld_road.PNG" alt="">
@@ -366,18 +369,19 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">어린이대공원</h2>
               <hr class="star-dark mb-5">
-              <img class="img-fluid mb-5" src="../static/img/portfolio/cake.png" alt="">
+              <img class="img-fluid mb-5" src="../static/img/portfolio/park.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>05:00 ~ 22:00</h3>
-			</div>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-              <div class="container">
+              <br>
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
+              <!--<div class="container">-->
                <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-어린이대공원사이트연결>
-               <p class="lead mb-0">요 버튼을
-               <a href="https://www.sisul.or.kr/open_content/childrenpark/introduce/use.jsp">클릭</a>.</p>
-              </div>
-              <br/>
+               <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="https://www.sisul.or.kr/open_content/childrenpark/introduce/use.jsp">클릭</a>.</p>-->
+               <button class="btn btn-primary btn-xl" onclick="location.href='https://www.sisul.or.kr/open_content/childrenpark/introduce/use.jsp'">클릭</button>
+              <!--</div>-->
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/park_road.PNG" alt="">
@@ -402,17 +406,19 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">남산</h2>
               <hr class="star-dark mb-5">
-              <img class="img-fluid mb-5" src="../static/img/portfolio/circus.png" alt="">
+              <img class="img-fluid mb-5" src="../static/img/portfolio/tower.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>10:00 ~ 23:00</h3>
-              <h4>10:00 ~ 24:00 (토)<h4>
-			</div>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <h4>10:00 ~ 24:00 (토)</h4>
+              <br>
+            <!--</div>-->
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
               <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-남산타워사이트연결>
-               <p class="lead mb-0">요 버튼을
-               <a href="http://www.nseoultower.co.kr/visit/use2.asp">클릭</a>.</p>
-              <br/>
+               <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="http://www.nseoultower.co.kr/visit/use2.asp">클릭</a>.</p>-->
+              <button class="btn btn-primary btn-xl" onclick="location.href='http://www.nseoultower.co.kr/visit/use2.asp'">클릭</button>
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/tower_road.PNG" alt="">
@@ -437,17 +443,19 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">덕수궁</h2>
               <hr class="star-dark mb-5">
-              <img class="img-fluid mb-5" src="../static/img/portfolio/game.png" alt="">
+              <img class="img-fluid mb-5" src="../static/img/portfolio/deoksu.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>09:00 ~ 21:00</h3>
               <h4>입장마감 20:00</h4>
-			</div>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <br>
+			<!--</div>-->
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-덕수궁사이트연결>
-               <p class="lead mb-0">요 버튼을
-               <a href="http://www.deoksugung.go.kr/c/visitor/1">클릭</a>.</p>
-              <br/>
+               <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="http://www.deoksugung.go.kr/c/visitor/1">클릭</a>.</p>-->
+             <button class="btn btn-primary btn-xl" onclick="location.href='http://www.deoksugung.go.kr/c/visitor/1'">클릭</button>
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/deoksu_road.PNG" alt="">
@@ -472,17 +480,19 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">경복궁</h2>
               <hr class="star-dark mb-5">
-              <img class="img-fluid mb-5" src="../static/img/portfolio/safe.png" alt="">
+              <img class="img-fluid mb-5" src="../static/img/portfolio/kyeongbok.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>09:00 ~ 17:00</h3>
               <h4>입장마감 16:00</h4>
-			</div>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <br>
+			<!--</div>-->
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
               <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-경복궁사이트연결>
-               <p class="lead mb-0">요 버튼을
-               <a href="http://www.royalpalace.go.kr/content/guide/guide01_tab01.asp">클릭</a>.</p>
-              <br/>
+               <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="http://www.royalpalace.go.kr/content/guide/guide01_tab01.asp">클릭</a>.</p>-->
+              <button class="btn btn-primary btn-xl" onclick="location.href='http://www.royalpalace.go.kr/content/guide/guide01_tab01.asp'">클릭</button>
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/kyeongbok_road.PNG" alt="">
@@ -507,17 +517,19 @@
             <div class="col-lg-8 mx-auto">
               <h2 class="text-secondary text-uppercase mb-0">북촌한옥마을</h2>
               <hr class="star-dark mb-5">
-              <img class="img-fluid mb-5" src="../static/img/portfolio/submarine.png" alt="">
+              <img class="img-fluid mb-5" src="../static/img/portfolio/hanok.jpg" alt="">
               <br>
               <h3>운영시간</h3>
               <h3>10:00 ~ 17:00</h3>
               <h4>골목길 쉬는 날 (일)</h4>
-			</div>
-              <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <br>
+			<!--</div>-->
+              <!--<p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>-->
               <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-북촌한옥마을사이트연결>
-               <p class="lead mb-0">요 버튼을
-               <a href="http://korean.visitseoul.net/tours/%EA%B0%80%EC%9E%A5-%ED%95%9C%EA%B5%AD%EC%8A%A4%EB%9F%AC%EC%9A%B4-%EA%B3%A8%EB%AA%A9-%EB%B6%81%EC%B4%8C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84_/11303#">클릭</a>.</p>
-              <br/>
+               <!--<p class="lead mb-0">요 버튼을-->
+               <!--<a href="http://korean.visitseoul.net/tours/%EA%B0%80%EC%9E%A5-%ED%95%9C%EA%B5%AD%EC%8A%A4%EB%9F%AC%EC%9A%B4-%EA%B3%A8%EB%AA%A9-%EB%B6%81%EC%B4%8C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84_/11303#">클릭</a>.</p>-->
+              <button class="btn btn-primary btn-xl" onclick="location.href='http://korean.visitseoul.net/tours/%EA%B0%80%EC%9E%A5-%ED%95%9C%EA%B5%AD%EC%8A%A4%EB%9F%AC%EC%9A%B4-%EA%B3%A8%EB%AA%A9-%EB%B6%81%EC%B4%8C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84_/11303#'">클릭</button>
+              <br><br>
               <div class="container">
                 <h1 class="text-uppercase mb-0">찾아가는 길</h1>
                 <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/hanok_road.PNG" alt="">
@@ -545,33 +557,6 @@
 
     <!-- Custom scripts for this template -->
     <script src="../static/js/freelancer.min.js"></script>
-
-    <!-- ajax 부분 -->
-    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
-    <br><hr><br>
-    <button onclick="ajaxReq()">차트 그리기 비동기 요청</button>
-    <div id="ajaxtest"></div>
-    <input id="ajaxddd">
-    <script type="text/javascript">
-		function ajaxReq() {
-		  var xhttp = new XMLHttpRequest();
-		  //alert("xx"); //여기는 실행됨!!
-
-		  xhttp.onreadystatechange = function() {
-			 if (this.readyState == 4 && this.status == 200) {
-		    	//responseText가 데이터!!
-		    	//drawChart(this.responseText);
-		    	//var day = {{ all_args }}
-		    	//document.getElementById('ajaxddd').value = "Ajax test"; //값 넣는 부분
-		    	alert({{ all_args }});
-		    }
-		  };
-
-		  xhttp.open("GET", "/testing", true); //true : 비동기
-		  xhttp.send();
-		}
-	</script>
-
 
   </body>
 
