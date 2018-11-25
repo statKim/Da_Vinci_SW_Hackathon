@@ -30,6 +30,7 @@
       border: 2.5px solid #2c3e50;}
       .abouttext{
       font-weight: 540;}
+    }
     </style>
 
   </head>
@@ -69,13 +70,13 @@
     <!-- Header -->
     <header class="masthead bg-primary text-white text-center">
       <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/profile.png" alt="">
+        <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/eye.png" alt="">
         <h1 class="text-uppercase mb-0">눈치싸움 대작전</h1>
         <hr class="star-light">
         <h3 class="text-center text-uppercase text-secondary mb-0">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#scrollbottom" title="Go to Bottom" style="color:#2c3e50"> by '다섯 명'</a>
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#scrollbottom" title="Go to Bottom" style="color:#2c3e50">made by '다섯 명'</a>
             </li>
           </ul>
         </h3>
@@ -105,7 +106,7 @@
                   <i class="fas fa-search-plus fa-2x">어린이대공원</i>
                 </div>
               </div>
-              <img class="img-fluid gridimg" src="../static/img/portfolio/coex.jpg" alt="">
+              <img class="img-fluid gridimg" src="../static/img/portfolio/park.jpg" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -122,17 +123,17 @@
             <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-4">
               <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                 <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                  <i class="fas fa-search-plus fa-2x">코엑스</i>
+                  <i class="fas fa-search-plus fa-2x">덕수궁</i>
                 </div>
               </div>
-              <img class="img-fluid gridimg" src="../static/img/portfolio/park.jpg" alt="">
+              <img class="img-fluid gridimg" src="../static/img/portfolio/deoksu.jpg" alt="">
             </a>
           </div>
           <div class="col-md-6 col-lg-4">
             <a class="portfolio-item d-block mx-auto" href="#portfolio-modal-5">
               <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
                 <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                  <i class="fas fa-search-plus fa-2x">경복궁/덕수궁</i>
+                  <i class="fas fa-search-plus fa-2x">경복궁</i>
                 </div>
               </div>
               <img class="img-fluid gridimg" src="../static/img/portfolio/kyeongbok.jpg" alt="">
@@ -185,7 +186,7 @@
           </div>
         </div>
         <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
+          <a class="btn btn-xl btn-outline-light" href="#portfolio">
             <i class="fas fa-chevron-up"></i>
               &nbsp; 지금 당신을 위하여! &nbsp;
             <i class="fas fa-chevron-up"></i>
@@ -284,7 +285,7 @@
             </ul>
           </div>
           <div class="col-md-4">
-            <h4 class="text-uppercase mb-4">About 다섯 명</h4>
+            <h4 class="text-uppercase mb-4">made by 다섯 명</h4>
             <p class="lead mb-0">서지완 김승윤 김현성 <br> 안지현&nbsp; 최나해 <br></p>
           </div>
         </div>
@@ -315,8 +316,11 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">롯데월드</h2>
               <hr class="star-dark mb-5">
+              <br>
+              <h3>운영시간</h3>
+              <h3>{{ time }} ~ {{ time2 }}</h3>
               <!-- 다음 지도 -->
               <div class="showmap">
                 <div class="map" id="map" style="width:750px;height:400px;"></div>
@@ -328,10 +332,20 @@
                         level: 3
                     };
                     var map = new daum.maps.Map(container, options);
+                    map.style.width = '650px';
+                    map.style.heght = '650px';
                 </script>
               </div>
               <!--<img class="img-fluid mb-5" src="../static/img/portfolio/cabin.png" alt="">-->
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                             <!-롯데월드사이트연결>
+              <p class="lead mb-0">요 버튼을
+               <a href="https://mticket.lotteworld.com/web/pdt/productList.do?ei_gsber=1210&amp;ei_bukrs=1200">클릭</a>.</p>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/lotteworld_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
@@ -350,22 +364,27 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">어린이대공원</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="../static/img/portfolio/cake.png" alt="">
+              <br>
+              <h3>운영시간</h3>
+              <h3>05:00 ~ 22:00</h3>
+			</div>
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <div class="container">
+               <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-어린이대공원사이트연결>
+               <p class="lead mb-0">요 버튼을
+               <a href="https://www.sisul.or.kr/open_content/childrenpark/introduce/use.jsp">클릭</a>.</p>
+              </div>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/park_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
-              <div class="container">
-               <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>
-               <p class="lead mb-0">요 버튼을
-               <a href="https://mticket.lotteworld.com/web/pdt/productList.do?ei_gsber=1210&amp;ei_bukrs=1200">클릭</a>.</p>
-              </div>
-              <div class="container">
-                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
-                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/lotteworld_road.PNG" alt="">
-              </div>
             </div>
           </div>
         </div>
@@ -381,10 +400,23 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">남산</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="../static/img/portfolio/circus.png" alt="">
+              <br>
+              <h3>운영시간</h3>
+              <h3>10:00 ~ 23:00</h3>
+              <h4>10:00 ~ 24:00 (토)<h4>
+			</div>
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-남산타워사이트연결>
+               <p class="lead mb-0">요 버튼을
+               <a href="http://www.nseoultower.co.kr/visit/use2.asp">클릭</a>.</p>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/tower_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
@@ -403,10 +435,23 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">덕수궁</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="../static/img/portfolio/game.png" alt="">
+              <br>
+              <h3>운영시간</h3>
+              <h3>09:00 ~ 21:00</h3>
+              <h4>입장마감 20:00</h4>
+			</div>
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+             <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-덕수궁사이트연결>
+               <p class="lead mb-0">요 버튼을
+               <a href="http://www.deoksugung.go.kr/c/visitor/1">클릭</a>.</p>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/deoksu_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
@@ -425,10 +470,23 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">경복궁</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="../static/img/portfolio/safe.png" alt="">
+              <br>
+              <h3>운영시간</h3>
+              <h3>09:00 ~ 17:00</h3>
+              <h4>입장마감 16:00</h4>
+			</div>
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-경복궁사이트연결>
+               <p class="lead mb-0">요 버튼을
+               <a href="http://www.royalpalace.go.kr/content/guide/guide01_tab01.asp">클릭</a>.</p>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/kyeongbok_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
@@ -447,10 +505,23 @@
         <div class="container text-center">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h2 class="text-secondary text-uppercase mb-0">Project Name</h2>
+              <h2 class="text-secondary text-uppercase mb-0">북촌한옥마을</h2>
               <hr class="star-dark mb-5">
               <img class="img-fluid mb-5" src="../static/img/portfolio/submarine.png" alt="">
+              <br>
+              <h3>운영시간</h3>
+              <h3>10:00 ~ 17:00</h3>
+              <h4>골목길 쉬는 날 (일)</h4>
+			</div>
               <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+              <h1 class="text-uppercase mb-0">예매 사이트로 이동</h1>                       <!-북촌한옥마을사이트연결>
+               <p class="lead mb-0">요 버튼을
+               <a href="http://korean.visitseoul.net/tours/%EA%B0%80%EC%9E%A5-%ED%95%9C%EA%B5%AD%EC%8A%A4%EB%9F%AC%EC%9A%B4-%EA%B3%A8%EB%AA%A9-%EB%B6%81%EC%B4%8C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84_/11303#">클릭</a>.</p>
+              <br/>
+              <div class="container">
+                <h1 class="text-uppercase mb-0">찾아가는 길</h1>
+                <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/road/hanok_road.PNG" alt="">
+              </div>
               <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
                 <i class="fa fa-close"></i>
                 Close Project</a>
@@ -474,6 +545,33 @@
 
     <!-- Custom scripts for this template -->
     <script src="../static/js/freelancer.min.js"></script>
+
+    <!-- ajax 부분 -->
+    <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+    <br><hr><br>
+    <button onclick="ajaxReq()">차트 그리기 비동기 요청</button>
+    <div id="ajaxtest"></div>
+    <input id="ajaxddd">
+    <script type="text/javascript">
+		function ajaxReq() {
+		  var xhttp = new XMLHttpRequest();
+		  //alert("xx"); //여기는 실행됨!!
+
+		  xhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+		    	//responseText가 데이터!!
+		    	//drawChart(this.responseText);
+		    	//var day = {{ all_args }}
+		    	//document.getElementById('ajaxddd').value = "Ajax test"; //값 넣는 부분
+		    	alert({{ all_args }});
+		    }
+		  };
+
+		  xhttp.open("GET", "/testing", true); //true : 비동기
+		  xhttp.send();
+		}
+	</script>
+
 
   </body>
 

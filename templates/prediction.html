@@ -24,26 +24,6 @@
     <!-- Custom styles for this template -->
     <link href="../static/css/freelancer.min.css" rel="stylesheet">
 
-  <!-- 셀렉트 제어 -->
-  <script language = "javascript">
-    //상위 셀렉트로 하위 셀렉트 제어하기
-    function showSub(obj) {
-
-        f = document.forms[0];
-
-        if(obj == {{ month[0] }}) {
-
-            f.SUB1.style.display = "";
-            f.SUB2.style.display = "none";
-
-        } else {
-
-            f.SUB1.style.display = "none";
-            f.SUB2.style.display = "";
-
-         }
-    }
-  </script>
   </head>
   <style>
     #bor{
@@ -197,57 +177,49 @@
         <hr class="star-dark mb-5">
       </div>
 	<!--<div id ="toppadding"></div>-->
-
+	<form method="get" action="/predict" > <!-- 서버로 데이터 넘기는 form -->
 		<div>
 		<table align="center">
-			<tr><th align ="left">&emsp;날짜&emsp; </th>
-				<td>
-                  <form name="select_month">
-                    {% if danger == True %}
-                      <!-- 상위 셀렉트 -->
-                      <select name=" " onChange="showSub(this.options[this.selectedIndex].value);">
-                        {% for m in month %}
-                          <option value="{{ m }}">{{ m }}
-                        {% endfor %}
-                      </select>월&emsp;
-                      <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="SUB1" style="display: ;">
-                        {% for d in day %}
-                          <option value="{{ d }}">{{ d }}</option>
-                        {% endfor %}
-                       </select>
-                      <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="SUB2" style="display: none;">
-                        {% for dn in day_next %}
-                          <option value="{{ dn }}">{{ dn }}</option>
-                        {% endfor %}
-                      </select>일
-                    {% else %}
-                      <select name=" " onChange="showSub(this.options[this.selectedIndex].value);">
-                          <option value="{{ month[0] }}">{{ month[0] }}
-                      </select>월&emsp;
-                      <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="SUB1" style="display: ;">
-                        {% for d in day %}
-                          <option value="{{ d }}">{{ d }}</option>
-                        {% endfor %}
-                      </select>
-                      <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="SUB2" style="display: none;">
-                        {% for dn in day_next %}
-                          <option value="{{ dn }}">{{ dn }}</option>
-                        {% endfor %}
-                      </select>일
-                    {% endif %}
-                  </form>
-			    </td></tr>
-			<tr><th align="left">&emsp;장소&emsp; </th>
+			<tr><th align ="left">&emsp;지역(구) </th>
+				<td>[몇월?]월&emsp;
+                    <!-- select 부분은 오늘 날짜에 맞게 for문으로 오늘부터 7일 이내까지 표시할 것 -->
+                    <select id="region" name="region">
+                        <option value="강남구">강남구</option>
+                        <option value="강동구">강동구</option>
+                        <option value="강북구">강북구</option>
+                        <option value="강서구">강서구</option>
+                        <option value="관악구">관악구</option>
+                        <option value="광진구">광진구</option>
+                        <option value="구로구">구로구</option>
+                        <option value="금천구">금천구</option>
+                        <option value="노원구">노원구</option>
+                        <option value="도봉구">도봉구</option>
+                        <option value="동대문구">동대문구</option>
+                        <option value="동작구">동작구</option>
+                        <option value="마포구">마포구</option>
+                        <option value="서대문구">서대문구</option>
+                        <option value="서초구">서초구</option>
+                        <option value="성동구">성동구</option>
+                        <option value="성북구">성북구</option>
+                        <option value="송파구">송파구</option>
+                        <option value="양천구">양천구</option>
+                        <option value="영등포구">영등포구</option>
+                        <option value="용산구">용산구</option>
+                        <option value="은평구">은평구</option>
+                        <option value="종로구">종로구</option>
+                        <option value="중구">중구</option>
+                        <option value="중랑구">중랑구</option>
+                    </select>일
+			</td></tr>
+			<tr><th align="left" >&emsp;상주인구수 </th>
+				<td ><input type ="text" id ="livingPeople" name ="livingPeople" size=40 required placeholder="상주인구수를 입력하세요. (1~19310)"></td></tr>
+			<tr><th align="left">&emsp;유사점포수  </th>
 				<td ><input type ="text" id= "numberStore" name ="numberStore" size=40 required placeholder="유사점포수를 입력하세요. (1~51)"></td></tr>
-			<!--<tr><th align ="left">&emsp;휴일유무  </th>-->
-				<!--<td ><input type ="text" id ="workingPeople" name ="workingPeople" size=40 required placeholder="직장인구수를 입력하세요. (2~19502)"></td></tr>-->
-			<!--<tr><th align ="left">&emsp;유동인구수  </th>-->
-				<!--<td ><input type ="text" id="movingPeople" name ="movingPeople" size=40 required placeholder="유동인구수를 입력하세요. (54~612074)"></td></tr>-->
-			<!--<tr><td colspan ="2"></td></tr>-->
+			<tr><th align ="left">&emsp;직장인구수  </th>
+				<td ><input type ="text" id ="workingPeople" name ="workingPeople" size=40 required placeholder="직장인구수를 입력하세요. (2~19502)"></td></tr>
+			<tr><th align ="left">&emsp;유동인구수  </th>
+				<td ><input type ="text" id="movingPeople" name ="movingPeople" size=40 required placeholder="유동인구수를 입력하세요. (54~612074)"></td></tr>
+			<tr><td colspan ="2"></td></tr>
 			<!--<tr><td></td></tr>-->
 			<!--<tr><td></td></tr>-->
 			<!--<tr><td></td></tr>-->
@@ -259,14 +231,12 @@
 			<tr><td colspan="2" align="center">
               <br>
               <!--<input  id ="predict" name="predict" type ="image" src="img/singup.png" value="예상">-->
-              <form method="post" action="/prediction" > <!-- 서버로 데이터 넘기는 form -->
               <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">예상!!</button>
-                </form>
             </td></tr>
 			<!--<tr><td colspan="2" align="center"><img width="800px" src = "img/frame2.png"></td></tr>-->
 		</table>
 		</div>
-
+	</form>
     </section>
 
 

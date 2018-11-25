@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"/>
-	<title>Daum 지도 시작하기</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ajax 간단 테스트</title>
+
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script type="text/javascript" language="javascript">
+
+var test = {
+        "name" : "홍길동",
+        "age"    : 27,
+        "address: "서울시"
+}
+
+$.ajax({
+		type : "POST",                               //1
+		url : "/test/home",                          //2
+		dataType : 'json',                           //3
+		contentType : 'application/json',            //4
+		data : JSON.stringify(test),                 //5
+		success : successCall,                       //6
+		error   : errorCall                          //7
+
+});
+
+function successCall(){
+    alert("전송성공");
+}
+
+function errorCall(){
+    alert("전송실패");
+}
+
+</script>
+
 </head>
 <body>
-	<div class="map" id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=185cbfef32b3cdb5d789a63d3c0db1e7"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new daum.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
 
-		var map = new daum.maps.Map(container, options);
-	</script>
+    <div id="dataArea"></div>
+
 </body>
 </html>
+

@@ -1,7 +1,9 @@
 # import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -39,22 +41,14 @@ db.create_all()
 # root page
 @app.route("/")
 def root():
-    return render_template("index.html")
+    url = "http://adventure.lotteworld.com/kor/usage-guide/service/index.do"
+    req = requests.get(url).text
+    doc = BeautifulSoup(req, "html.parser")
+    time = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[0].text
+    time2 = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[1].text.split(" ")[1]
+    return render_template("index.html", time=time, time2=time2)
 
 # 게시판 page
-# @app.route("/board")
-# def board():
-#     # myapp.db에 있는 모든 레코드(db의 한 행)를 불러와 보여줌
-#     # select * from posts;
-#     page = request.args.get("page")
-#     posts = Post.query.all()    # 리스트 형태로 반환됨!!
-#     numpage = len(posts) // 10 + 1  # 한 페이지에 10개의 게시글만 오게 하고 나머지지는 다음 쪽수로 넘겨야 볼수 있게!!
-#     numpage = range(1, numpage+1, 1)    # 넘길 때 리스트 형태로 넘김
-#     if len(posts) > 10:
-#         posts = posts[len(posts)-10:len(posts)+1] # 한 페이지에 10개만 보여주기
-#     return render_template("board.html", posts=reversed(posts), numpage=numpage)
-
-# 게시판 page 다음으로 넘길 때!!
 @app.route("/board/<int:page>")
 def board(page):
     # myapp.db에 있는 모든 레코드(db의 한 행)를 불러와 보여줌
@@ -103,7 +97,6 @@ def create():
     post = Post(name=name, password=password, title=title, content=content, count=count, date=date, date_update=date_update)
     db.session.add(post) # 데이터베이스에 내용 추가할거야!(session은 추가할 때마다 부르는 거라고 생각하면 됨)
     db.session.commit() # commit으로 확정시킴!(확실히 저장!)
-    # return render_template("create.html", name=name, title=title, content=content)
     return redirect("/board/1") # create.html을 거치지 않고 바로 board.html로 오는 방법
 
 # 게시글 수정하는 페이지로 넘어가게 하는 부분
@@ -144,6 +137,7 @@ def delete(id):
     db.session.delete(post)
     for i in range(len(comment)):
         db.session.delete(comment[i])
+        # db.session.commit()   # 해야할까??
     # 3. 확정하고 DB에 반영한다.
     db.session.commit()
     return redirect("/board/1")
@@ -173,8 +167,40 @@ def create_comment():
 # 혼잡도 예측 page
 @app.route("/predict")
 def predict():
-    return render_template("predict.html")
+    now = datetime.now()
+    d30 = [4, 6, 9, 11]
+    d31 = [1, 3, 5, 7, 8, 10, 12]
+    month = [now.month]
+    day = now.day
+    danger = True
+    if (day >= 25) and (month[0] in d30):   # 오늘부터 7일 이후까지 보여줄건데 30일이 넘어갈 경우
+        month.append(now.month + 1)
+        day_next = [d for d in range(1, 7-(31-day)+1, 1)]
+        day = [d for d in range(day, 31, 1)]
+    elif (day >= 26) and (month[0] in d31):
+        month.append(now.month+1)
+        day_next = [d for d in range(1, 7-(30-day)+1, 1)]
+        day = [d for d in range(day, 32, 1)]
+    elif (day >= 23) and (month[0] == 2):
+        month.append(now.month + 1)
+        day_next = [d for d in range(1, 7-(28-day)+1, 1)]
+        day = [d for d in range(day, 29, 1)]
+    else:
+        day = [d for d in range(day, day+7, 1)]
+        day_next = day
+        danger = False
+    return render_template("predict.html", month=month, day=day, day_next=day_next, danger=danger)
 
+@app.route("/prediction", methods=["POST"])
+def prediction():
+    value = request.form['region']
+    return value
+    # return render_template("prediction.html")
+
+@app.route("/testing")
+def testing():
+    all_args = "제발 성공 좀 ㅠㅠ"
+    return jsonify(all_args)
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
