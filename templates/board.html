@@ -178,11 +178,11 @@
       </div>
       <table class="type09" width="90%" align="center">
         <tr>
-		  <th scope="cols" id= "box1">No.</th>
-		  <th scope="cols" id= "box1">제목</th>
-		  <th scope="cols" id= "box1">글쓴이</th>
-		  <th scope="cols" id= "box1">조회수</th>
-		  <th scope="cols" id= "box1">날짜</th>
+		  <th scope="cols" id= "box1" style="width:8%">No.</th>
+		  <th scope="cols" id= "box1" style="width:30%">제목</th>
+		  <th scope="cols" id= "box1" style="width:20%">글쓴이</th>
+		  <th scope="cols" id= "box1" style="width:10%">조회수</th>
+		  <th scope="cols" id= "box1" style="width:10%">작성일</th>
 		</tr>
 		{% for p in posts %}
             <tr align="center">
@@ -208,6 +208,7 @@
       <form method="get" action="/write" align="right">
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">글쓰기</button>
+          <!--<button type="submit" class="btn btn-primary btn-lg rounded-pill" id="sendMessageButton">글쓰기</button>-->
         </div>
       </form>
     </section>

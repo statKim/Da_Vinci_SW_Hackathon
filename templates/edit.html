@@ -103,51 +103,14 @@
             <td><textarea cols="50" role="12" name="content" id="content">{{ post.content }}</textarea></td>
           </tr>
           <tr>
-            <td colspan="2" align="right"><input type="submit" value="등록"></td>
+            <td colspan="2" align="right">
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">등록</button>
+              <!--<button type="submit" class="btn btn-primary btn-lg rounded-pill" id="sendMessageButton">글쓰기</button>-->
+            </td>
           </tr>
         </table>
       </form>
-    <script>
-      function onWriteSubmit()
-      {
-        if ( $("#writer").val().trim() == "" )
-        {
-          var message = "아이디를 입력해 주세요";
-          $("#writer").val("");
-          $("#writer").focus();
-          alert(message);
-          return false;
-        }
-  
-        if ( $("#title").val().trim() == "" )
-        {
-          var message = "제목을 입력해 주세요";
-          $("#title").val("");
-          $("#title").focus();
-          alert(message);
-          return false;
-        }
-  
-        if ( $("#content").val().trim() == "" )
-        {
-          var message = "본문 내용을 입력해 주세요";
-          $("#content").val("");
-          $("#content").focus();
-          alert(message);
-          return false;
-        }
-  
-        if ( $("#password").val().trim() == "" )
-        {
-          var message = "패스워드를 입력해 주세요";
-          $("#password").val("");
-          $("#password").focus();
-          alert(message);
-          return false;
-        }
-      }
-    </script>
-  </section>
+    </section>
 
 
     <!-- About Section -->
