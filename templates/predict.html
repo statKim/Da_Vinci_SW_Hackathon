@@ -273,26 +273,26 @@
     </section>
     <!-- Ajax javascript -->
     <script type="text/javascript">
-		function ajaxReq() {
-		  var xhttp = new XMLHttpRequest();
-
-          // "/testing" 라우터로 넘김, 2개의 값을 "/"로 구분하여 보냄
-          url = "testing/"+document.getElementById('month').value + "/" + document.getElementById('day').value
-          url = url + "/" + document.getElementById('day_next').value + "/" + document.getElementById('place').value
-		  xhttp.open("GET", url, true); //true : 비동기
-		  xhttp.send();
-
+  		function ajaxReq() {
+  		  var xhttp = new XMLHttpRequest();
+  
+        // "/testing" 라우터로 넘김, 2개의 값을 "/"로 구분하여 보냄
+        var url = "testing/"+document.getElementById('month').value + "/" + document.getElementById('day').value
+        url = url + "/" + document.getElementById('day_next').value + "/" + document.getElementById('place').value
+  		  xhttp.open("GET", url, true); //true : 비동기
+  		  xhttp.send();
+  
           // 서버에서 값 받아오는 함수 => xhttp.send() 이후에 자동 실행됨
-		  xhttp.onreadystatechange = function() {
-			 if (this.readyState == 4 && this.status == 200) {
-		    	var val = this.responseText  //responseText가 데이터!!
-		    	alert(val)
-		    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
-		    	document.getElementById('result').innerHTML = JSON.parse(val)["status"]; // div에 값 넣기
-		    }
-		  };
-		}
-	</script>
+    	   xhttp.onreadystatechange = function() {
+      		 if (this.readyState == 4 && this.status == 200) {
+      	    	var val = this.responseText  //responseText가 데이터!!
+      	    	alert(val)
+      	    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
+      	    	document.getElementById('result').innerHTML = JSON.parse(val)["status"]; // div에 값 넣기
+      	    }
+    	   };
+	  	}
+  	</script>
 
 
 

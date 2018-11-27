@@ -178,13 +178,13 @@
       </div>
       <table class="type09" width="90%" align="center">
         <tr>
-		  <th scope="cols" id= "box1" style="width:8%">No.</th>
-		  <th scope="cols" id= "box1" style="width:30%">제목</th>
-		  <th scope="cols" id= "box1" style="width:20%">글쓴이</th>
-		  <th scope="cols" id= "box1" style="width:10%">조회수</th>
-		  <th scope="cols" id= "box1" style="width:10%">작성일</th>
-		</tr>
-		{% for p in posts %}
+    		  <th scope="cols" id= "box1" style="width:8%">No.</th>
+    		  <th scope="cols" id= "box1" style="width:30%">제목</th>
+    		  <th scope="cols" id= "box1" style="width:20%">글쓴이</th>
+    		  <th scope="cols" id= "box1" style="width:10%">조회수</th>
+    		  <th scope="cols" id= "box1" style="width:10%">작성일</th>
+  		  </tr>
+		    {% for p in posts %}
             <tr align="center">
               <td scope="row">{{ p.id }}</td></td>
               <td scope="row"><a href="/read/{{ p.id }}">{{ p.title }}
@@ -196,13 +196,32 @@
               <td scope="row">{{ p.count }}</td>
               <td scope="row">{{ p.date }}</td>
             </tr>
-        {% endfor %}
+       {% endfor %}
       </table>
       <br>
+      <!-- 페이지 넘기는 부분을 bootstrap에서 가져옴 -->
       <table align="center">
-        {% for i in numpage %}
-          <td scope="row"><a href="/board/{{ i }}">{{ i }}</a></td>
-        {% endfor %}
+        <tr><td colspan="5">
+          <ul class="pagination" style="text-align:center;">
+            <li class="page-item">
+              <a class="page-link" aria-label="Previous" href='javascript:void(0);' onClick='page_next(); return false'>
+              <!--<a class="page-link" href="#" aria-label="Previous">-->
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            {% for i in numpage %}
+              <li class="page-item"><a class="page-link" href="/board/{{ i }}">{{ i }}</a></li>
+              <!--<td scope="row"><a href="/board/{{ i }}">{{ i }}</a></td>-->
+            {% endfor %}
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </td></tr>
       </table>
       <br><br>
       <form method="get" action="/write" align="right">
@@ -212,6 +231,35 @@
         </div>
       </form>
     </section>
+    <!-- 페이지 넘기는 함수 -->
+    <script type="text/javascript">
+  		function page_next() {
+        var url = document.location.href.split("/")
+        var page_now = url[url.length-1]
+        alert(page_now)
+        if (page_now == {{ page }}) {
+          page_
+        }
+        // "/testing" 라우터로 넘김, 2개의 값을 "/"로 구분하여 보냄
+      //   var url = "testing/"+document.getElementById('month').value + "/" + document.getElementById('day').value
+      //   url = url + "/" + document.getElementById('day_next').value + "/" + document.getElementById('place').value
+  		  // xhttp.open("GET", url, true); //true : 비동기
+  		  // xhttp.send();
+  
+      //     // 서버에서 값 받아오는 함수 => xhttp.send() 이후에 자동 실행됨
+    	 //  xhttp.onreadystatechange = function() {
+      // 		 if (this.readyState == 4 && this.status == 200) {
+      // 	    	var val = this.responseText  //responseText가 데이터!!
+      // 	    	alert(val)
+      // 	    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
+      // 	    	document.getElementById('result').innerHTML = JSON.parse(val)["status"]; // div에 값 넣기
+      // 	    }
+    	 //  };
+	  	}
+  	</script>
+
+
+
 
     <!-- Footer -->
     <footer class="footer text-center">
