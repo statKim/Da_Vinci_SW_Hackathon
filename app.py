@@ -17,7 +17,7 @@ db.init_app(app)
 # 게시글 table(posts)
 class Post(db.Model): # db.Model을 상속받은 것
     __tablename__ = "posts"
-    id = db.Column(db.Integer, primary_key=True) # sql문과 비슷한 형식!!
+    id = db.Column(db.Integer, primary_key=True)  # sql문과 비슷한 형식!!
     name = db.Column(db.String, nullable=False)
     title = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
@@ -63,12 +63,15 @@ def board(page):
             if p.id == c.post_id:
                 count += 1
         comment_count[p] = count
-    numpage = len(posts) // 10 + 1  # 한 페이지에 10개의 게시글만 오게 하고 나머지지는 다음 쪽수로 넘겨야 볼수 있게!!
+    if len(posts) % 10 != 0:
+        numpage = (len(posts) // 10) + 1  # 한 페이지에 10개의 게시글만 오게 하고 나머지지는 다음 쪽수로 넘겨야 볼수 있게!!
+    else:
+        numpage = (len(posts) // 10)    # 만약 10개의 게시글이 존재한다면 1쪽만 있게 하기 위해
     numpage = range(1, numpage+1, 1)    # 넘길 때 리스트 형태로 넘김
-    end = (len(posts)+1) - (10*(page - 1))
+    end = (len(posts)) - (10*(page - 1))
     start = end - 10
     if (len(posts) - 10*page) <= 0:  # 이 페이지가 마지막일 때
-        posts = posts[0:len(posts)-10*(page-1)+1]   # 있는 것까지만 보여주기
+        posts = posts[0:len(posts)-10*(page-1)]   # 있는 것까지만 보여주기
     else:
         posts = posts[start:end]
     if len(posts) >= 2:  # 최근것부터 나와야 하기 때문
@@ -212,5 +215,5 @@ def testing(val, val2, val3, val4):
 
 
 if __name__ == '__main__':
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
-    # app.run(debug=True)
+    # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
+    app.run(debug=True)

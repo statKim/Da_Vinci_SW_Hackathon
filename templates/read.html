@@ -161,12 +161,12 @@
       </div>
       <table class="type09" width="90%" align="center">
     	<tr>
-    		<th  id= "box1">번호</th>
-    		<td>{{ post.id }}</td>
-    		<th  id= "box1">조회수</th>
-    		<td>{{ post.count }}</td>
-    		<th  id= "box1">글쓴이</th>
-    		<td>{{ post.name }}</td>
+    		<th id= "box1" style="width:15%">번호</th>
+    		<td style="width:15%">{{ post.id }}</td>
+    		<th id= "box1" style="width:15%">조회수</th>
+    		<td style="width:15%">{{ post.count }}</td>
+    		<th id= "box1" style="width:15%">글쓴이</th>
+    		<td style="width:15%">{{ post.name }}</td>
     	</tr>
     	<tr>
     		<th id= "box1">제목</th>
@@ -179,7 +179,7 @@
     		<td colspan="2">{{ post.date_update }}</td>
     	</tr>
     	<tr>
-        	<td colspan="6" height="400" class="inboard">{{ post.content }}</td>
+        	<td colspan="6" height="400px" class="inboard">{{ post.content }}</td>
     	</tr>
     	<!-- 댓글 보는 부분 -->
     	{% for c in comment %}
@@ -189,15 +189,18 @@
         			<td colspan="5">{{ c.content }}</td>
         		</tr>
             {% endif %}
-        {% endfor %}    		
+        {% endfor %}
         <!-- 댓글 쓰는 부분 -->
         <tr>
             <form action="/create_comment">
-                <th id="box1"><input type="text" name="name" placeholder="이름"></th>
-                <td colspan="4"><input type="text" name="comment_content" style="width:800px;" placeholder="댓글"></td>
+                <th id="box1">
+                  <input class="form-control" name="name" type="text" placeholder="이름">
+                </th>
+                <td colspan="4">
+                  <input class="form-control" name="comment_content" type="text" style="width:100%;" placeholder="댓글을 입력하세요.">
+                </td>
                 <td>
                     <input type="hidden" name="post_id" value="{{ post.id }}">
-                    <!--<button type="submit">등록</button>-->
                      <button type="submit" class="btn btn-primary btn-xg rounded-pill" id="sendMessageButton">등록</button>
                 </td>
             </form>
@@ -212,11 +215,24 @@
     		</td>
             <td align="right" colspan="2">
               <button class="btn btn-primary btn-xl" onclick="location.href='/edit/{{ post.id }}'">수정</button>
-              <button class="btn btn-primary btn-xl" onclick="location.href='/delete/{{ post.id }}'">삭제</button>
+              <button class="btn btn-primary btn-xl" onclick="delete_post();">삭제</button>
             </td>
         </tr>
       </table>
     </section>
+
+    <script type="text/javascript">
+      function delete_post() {
+        var retVal = confirm("게시글을 삭제하시겠습니까?");
+        if( retVal == true ){
+           //alert("확인선택!");
+           location.href = "/delete/{{ post.id }}";
+        }else{
+           alert("취소선택!");
+        }
+      }
+    </script>
+
 
     <!-- Footer -->
     <footer class="footer text-center">

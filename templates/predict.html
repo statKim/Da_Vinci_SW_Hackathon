@@ -206,35 +206,41 @@
                   <form name="select_month">
                     {% if danger == True %}
                       <!-- 상위 셀렉트 -->
-                      <select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">
+                      <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">
+                      <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
                         {% for m in month %}
                           <option value="{{ m }}">{{ m }}
                         {% endfor %}
                       </select>월&emsp;
                       <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="day" style="display: ;">
+                      <select class="custom-select" id="day" name="day" style="display: ; width:40%;">
+                      <!--<select id="day" name="day" style="display: ;">-->
                         {% for d in day %}
                           <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                        </select>
                       <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="day_next" style="display: none;">
+                      <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">
+                      <!--<select id="day_next" name="day_next" style="display: none;">-->
                         {% for dn in day_next %}
                           <option value="{{ dn }}">{{ dn }}</option>
                         {% endfor %}
                       </select>일
                     {% else %}
-                      <select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">
+                      <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">
+                      <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
                           <option value="{{ month[0] }}">{{ month[0] }}
                       </select>월&emsp;
                       <!-- 하위 셀렉트 1 -->
-                      <select id="day" name="day" style="display: ;">
+                      <select class="custom-select" id="day" name="day" style="display: ; width:40%;">
+                      <!--<select id="day" name="day" style="display: ;">-->
                         {% for d in day %}
                           <option value="{{ d }}">{{ d }}</option>
                         {% endfor %}
                       </select>
                       <!-- 하위 셀렉트 2 -->
-                      <select id="day_next" name="day_next" style="display: none;">
+                      <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">
+                      <!--<select id="day_next" name="day_next" style="display: none;">-->
                         {% for dn in day_next %}
                           <option value="{{ dn }}">{{ dn }}</option>
                         {% endfor %}
