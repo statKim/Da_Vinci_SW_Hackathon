@@ -67,75 +67,70 @@
       </div>
     </nav>
 
-    <!-- Header
-    <header class="masthead bg-primary text-white text-center">
-      <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/profile.png" alt="">
-        <h1 class="text-uppercase mb-0">눈치싸움 대작전</h1>
-        <hr class="star-light">
-        <h2 class="font-weight-light mb-0">다섯 명</h2>
-      </div>
-    </header> -->
-
     <br><br><br>
     <section class="portfolio" id="portfolio">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">게시판</h2>
         <hr class="star-dark mb-5">
-      </div>
+        <form id="form" action="/update/{{ post.id }}" onsubmit="onWriteSubmit()">
+          <div class="form-group row">
+            <label for="title" class="col-sm-2 col-form-label"><h4>제목</h4></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="title" name="title" value={{ post.title }}>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label"><h4>글쓴이</h4></label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" name="name" value={{ post.name }}>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label"><h4>비밀번호</h4></label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="content" class="col-sm-2 col-form-label"><h4>내용</h4></label>
+            <div class="col-sm-10">
+                <textarea class="form-control" cols="50" role="12" name="content" id="content">{{ post.content }}</textarea>
+            </div>
+          </div>  
+          <div class="form-group row" style="text-align:center">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" placeholder="내용을 입력하세요">등록</button>
+            </div>
+          </div>
+        </form>
 
-      <form id="form" action="/update/{{ post.id }}" onsubmit="onWriteSubmit()">
-        <table align="center" id="table">
-          <tr>
-            <th>제목</th>
-            <td><input type="text" name="title" id="title" size=50 value="{{ post.title }}"></td>
-          </tr>
-          <tr>
-            <th>글쓴이</th>
-            <td><input type="text" name="name" id="name" value="{{ post.name }}"></td>
-          </tr>
-          <tr>
-            <th>비밀번호</th>
-            <td><input type="password" name="password" id="password" required/></td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td><textarea cols="50" role="12" name="content" id="content">{{ post.content }}</textarea></td>
-          </tr>
-          <tr>
-            <td colspan="2" align="right">
-              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">등록</button>
+      <!--<form id="form" action="/update/{{ post.id }}" onsubmit="onWriteSubmit()">-->
+      <!--  <table align="center" id="table">-->
+      <!--    <tr>-->
+      <!--      <th>제목</th>-->
+      <!--      <td><input type="text" name="title" id="title" size=50 value="{{ post.title }}"></td>-->
+      <!--    </tr>-->
+      <!--    <tr>-->
+      <!--      <th>글쓴이</th>-->
+      <!--      <td><input type="text" name="name" id="name" value="{{ post.name }}"></td>-->
+      <!--    </tr>-->
+      <!--    <tr>-->
+      <!--      <th>비밀번호</th>-->
+      <!--      <td><input type="password" name="password" id="password" required/></td>-->
+      <!--    </tr>-->
+      <!--    <tr>-->
+      <!--      <th>내용</th>-->
+      <!--      <td><textarea cols="50" role="12" name="content" id="content">{{ post.content }}</textarea></td>-->
+      <!--    </tr>-->
+      <!--    <tr>-->
+      <!--      <td colspan="2" align="right">-->
+      <!--        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">등록</button>-->
               <!--<button type="submit" class="btn btn-primary btn-lg rounded-pill" id="sendMessageButton">글쓰기</button>-->
-            </td>
-          </tr>
-        </table>
-      </form>
+      <!--      </td>-->
+      <!--    </tr>-->
+      <!--  </table>-->
+      <!--</form>-->
     </section>
-
-
-    <!-- About Section -->
-<!--    <section class="bg-primary text-white mb-0" id="about">
-      <div class="container">
-        <h2 class="text-center text-uppercase text-white">About</h2>
-        <hr class="star-light mb-5">
-        <div class="row">
-          <div class="col-lg-4 ml-auto">
-            <p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
-          </div>
-          <div class="col-lg-4 mr-auto">
-            <p class="lead">Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <a class="btn btn-xl btn-outline-light" href="#">
-            <i class="fas fa-download mr-2"></i>
-            Download Now!
-          </a>
-        </div>
-      </div>
-    </section>-->
-
-
 
     <!-- Footer -->
     <footer class="footer text-center">

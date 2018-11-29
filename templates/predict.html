@@ -180,103 +180,165 @@
       </div>
     </nav>
 
-    <!-- Header
-    <header class="masthead bg-primary text-white text-center">
-      <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="../static/img/profile.png" alt="">
-        <h1 class="text-uppercase mb-0">눈치싸움 대작전</h1>
-        <hr class="star-light">
-        <h2 class="font-weight-light mb-0">다섯 명</h2>
-      </div>
-    </header> -->
-
     <br><br><br>
     <section class="portfolio" id="portfolio">
       <div class="container">
         <h2 class="text-center text-uppercase text-secondary mb-0">예상 혼잡도</h2>
         <hr class="star-dark mb-5">
-      </div>
+ <!--     </div>-->
 	<!--<div id ="toppadding"></div>-->
-
-		<div>
-        <!--<form method="post" action="/prediction"> &lt;!&ndash; 서버로 데이터 넘기는 form &ndash;&gt;-->
-		<table align="center">
-			<tr><th align ="left">&emsp;날짜&emsp; </th>
-				<td>
-                  <form name="select_month">
-                    {% if danger == True %}
-                      <!-- 상위 셀렉트 -->
-                      <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">
-                      <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
-                        {% for m in month %}
-                          <option value="{{ m }}">{{ m }}
-                        {% endfor %}
-                      </select>월&emsp;
-                      <!-- 하위 셀렉트 1 -->
-                      <select class="custom-select" id="day" name="day" style="display: ; width:40%;">
-                      <!--<select id="day" name="day" style="display: ;">-->
-                        {% for d in day %}
-                          <option value="{{ d }}">{{ d }}</option>
-                        {% endfor %}
-                       </select>
-                      <!-- 하위 셀렉트 2 -->
-                      <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">
-                      <!--<select id="day_next" name="day_next" style="display: none;">-->
-                        {% for dn in day_next %}
-                          <option value="{{ dn }}">{{ dn }}</option>
-                        {% endfor %}
-                      </select>일
-                    {% else %}
-                      <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">
-                      <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
-                          <option value="{{ month[0] }}">{{ month[0] }}
-                      </select>월&emsp;
-                      <!-- 하위 셀렉트 1 -->
-                      <select class="custom-select" id="day" name="day" style="display: ; width:40%;">
-                      <!--<select id="day" name="day" style="display: ;">-->
-                        {% for d in day %}
-                          <option value="{{ d }}">{{ d }}</option>
-                        {% endfor %}
-                      </select>
-                      <!-- 하위 셀렉트 2 -->
-                      <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">
-                      <!--<select id="day_next" name="day_next" style="display: none;">-->
-                        {% for dn in day_next %}
-                          <option value="{{ dn }}">{{ dn }}</option>
-                        {% endfor %}
-                      </select>일
-                    {% endif %}
-                  </form>
-			    </td></tr>
-			<tr><th align="left">&emsp;장소&emsp; </th>
-				<td >
-                  <select id="place" name="place">
-                    <option value="롯데월드">롯데월드</option>
-                    <option value="어린이대공원">어린이대공원</option>
-                    <option value="남산">남산</option>
-                    <option value="덕수궁">덕수궁</option>
-                    <option value="경복궁">경복궁</option>
-                    <option value="북촌한옥마을">북촌한옥마을</option>
+	<!--    <div class="container">-->
+          <div class="form-group row">
+            <label for="month" class="col-sm-2 col-form-label"><h4>날짜</h4></label>
+            <div class="col-sm-10" style="text-align:left">
+              <form name="select_month">
+                {% if danger == True %}
+                  <!-- 상위 셀렉트 -->
+                  <select class="custom-select" id="month" name="month" style="width:20%" onChange="showSub(this.options[this.selectedIndex].value);">
+                  <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
+                    {% for m in month %}
+                      <option value="{{ m }}">{{ m }}
+                    {% endfor %}
+                  </select>&emsp;월&emsp;
+                  <!-- 하위 셀렉트 1 -->
+                  <select class="custom-select" id="day" name="day" style="display: ; width:20%;">
+                  <!--<select id="day" name="day" style="display: ;">-->
+                    {% for d in day %}
+                      <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
+                   </select>
+                  <!-- 하위 셀렉트 2 -->
+                  <select class="custom-select" id="day_next" name="day_next" style="display: none; width:20%;">
+                  <!--<select id="day_next" name="day_next" style="display: none;">-->
+                    {% for dn in day_next %}
+                      <option value="{{ dn }}">{{ dn }}</option>
+                    {% endfor %}
+                  </select>&emsp;일
+                {% else %}
+                  <select class="custom-select" id="month" name="month" style="width:20%" onChange="showSub(this.options[this.selectedIndex].value);">
+                  <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
+                      <option value="{{ month[0] }}">{{ month[0] }}
+                  </select>월&emsp;
+                  <!-- 하위 셀렉트 1 -->
+                  <select class="custom-select" id="day" name="day" style="display: ; width:20%;">
+                  <!--<select id="day" name="day" style="display: ;">-->
+                    {% for d in day %}
+                      <option value="{{ d }}">{{ d }}</option>
+                    {% endfor %}
                   </select>
-                </td>
-            </tr>
-			<tr>
-              <td colspan="2" align="center">
-                <br>
-                <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" align="center">
-                <br>
-                <!--<input id="result" >-->
-                <div id="result"></div>
-              </td>
-            </tr>
-		</table>
+                  <!-- 하위 셀렉트 2 -->
+                  <select class="custom-select" id="day_next" name="day_next" style="display: none; width:20%;">
+                  <!--<select id="day_next" name="day_next" style="display: none;">-->
+                    {% for dn in day_next %}
+                      <option value="{{ dn }}">{{ dn }}</option>
+                    {% endfor %}
+                  </select>일
+                {% endif %}
+              </form>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="place" class="col-sm-2 col-form-label"><h4>장소</h4></label>
+            <div class="col-sm-10" style="text-align:left">
+              <select id="place" name="place" class="custom-select" style="width:50%;">
+                <option value="롯데월드">롯데월드</option>
+                <option value="어린이대공원">어린이대공원</option>
+                <option value="남산">남산</option>
+                <option value="덕수궁">덕수궁</option>
+                <option value="경복궁">경복궁</option>
+                <option value="북촌한옥마을">북촌한옥마을</option>
+              </select>
+            </div>
+          </div>          
+          <div class="form-group row" style="text-align:center">
+            <!--<label for="place" class="col-sm-2 col-form-label"><h4>장소</h4></label>-->
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>
+            </div>
+          </div>   
+      </div>
+
+		<!--<div>-->
+        <!--<form method="post" action="/prediction"> &lt;!&ndash; 서버로 데이터 넘기는 form &ndash;&gt;-->
+		<!--<table align="center">-->
+		<!--	<tr><th align ="left">&emsp;날짜&emsp; </th>-->
+		<!--		<td>-->
+  <!--        <form name="select_month">-->
+  <!--          {% if danger == True %}-->
+              <!-- 상위 셀렉트 -->
+  <!--            <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">-->
+              <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
+  <!--              {% for m in month %}-->
+  <!--                <option value="{{ m }}">{{ m }}-->
+  <!--              {% endfor %}-->
+  <!--            </select>월&emsp;-->
+              <!-- 하위 셀렉트 1 -->
+  <!--            <select class="custom-select" id="day" name="day" style="display: ; width:40%;">-->
+              <!--<select id="day" name="day" style="display: ;">-->
+  <!--              {% for d in day %}-->
+  <!--                <option value="{{ d }}">{{ d }}</option>-->
+  <!--              {% endfor %}-->
+  <!--             </select>-->
+              <!-- 하위 셀렉트 2 -->
+  <!--            <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">-->
+              <!--<select id="day_next" name="day_next" style="display: none;">-->
+  <!--              {% for dn in day_next %}-->
+  <!--                <option value="{{ dn }}">{{ dn }}</option>-->
+  <!--              {% endfor %}-->
+  <!--            </select>일-->
+  <!--          {% else %}-->
+  <!--            <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">-->
+              <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
+  <!--                <option value="{{ month[0] }}">{{ month[0] }}-->
+  <!--            </select>월&emsp;-->
+              <!-- 하위 셀렉트 1 -->
+  <!--            <select class="custom-select" id="day" name="day" style="display: ; width:40%;">-->
+              <!--<select id="day" name="day" style="display: ;">-->
+  <!--              {% for d in day %}-->
+  <!--                <option value="{{ d }}">{{ d }}</option>-->
+  <!--              {% endfor %}-->
+  <!--            </select>-->
+              <!-- 하위 셀렉트 2 -->
+  <!--            <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">-->
+              <!--<select id="day_next" name="day_next" style="display: none;">-->
+  <!--              {% for dn in day_next %}-->
+  <!--                <option value="{{ dn }}">{{ dn }}</option>-->
+  <!--              {% endfor %}-->
+  <!--            </select>일-->
+  <!--          {% endif %}-->
+  <!--        </form>-->
+  <!--      </td>-->
+  <!--    </tr>-->
+		<!--	<tr><th align="left">&emsp;장소&emsp; </th>-->
+		<!--		<td>-->
+  <!--        <select id="place" name="place">-->
+  <!--          <option value="롯데월드">롯데월드</option>-->
+  <!--          <option value="어린이대공원">어린이대공원</option>-->
+  <!--          <option value="남산">남산</option>-->
+  <!--          <option value="덕수궁">덕수궁</option>-->
+  <!--          <option value="경복궁">경복궁</option>-->
+  <!--          <option value="북촌한옥마을">북촌한옥마을</option>-->
+  <!--        </select>-->
+  <!--      </td>-->
+  <!--    </tr>-->
+		<!--	<tr>-->
+  <!--      <td colspan="2" align="center">-->
+  <!--        <br>-->
+  <!--        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>-->
+  <!--      </td>-->
+  <!--    </tr>-->
+  <!--    <tr>-->
+  <!--      <td colspan="2" align="center">-->
+  <!--        <br>-->
+          <!--<input id="result" >-->
+  <!--        <div id="result"></div>-->
+  <!--      </td>-->
+  <!--    </tr>-->
+		<!--</table>-->
         <!--</form>-->
-		</div>
+		<!--</div>-->
     </section>
+    
     <!-- Ajax javascript -->
     <script type="text/javascript">
   		function ajaxReq() {
