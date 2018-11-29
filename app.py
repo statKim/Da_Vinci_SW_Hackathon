@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
+import weather_api  # 기상청 API 사용하여 만든 사용자 정의 모듈
 
 app = Flask(__name__)
 
@@ -35,7 +36,28 @@ class Comment(db.Model):
     content = db.Column(db.String, nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), nullable=False)
 
+# 혼잡도 예측 table(congest)
+class Congest(db.Model):
+    __tablename__ = "congest"
+    id = db.Column(db.Integer, primary_key=True)    # id(사실상 순서 구분)
+    date = db.Column(db.String, nullable=False)     # 혼잡도 알고싶은 날짜
+    people = db.Column(db.Integer, nullable=False)  # 생활인구(response)
+    mon = db.Column(db.Integer, nullable=False)	    # 월요일
+    tue = db.Column(db.Integer, nullable=False)     # 화요일
+    wed = db.Column(db.Integer, nullable=False)     # 수요일
+    thu = db.Column(db.Integer, nullable=False)     # 목요일
+    fri = db.Column(db.Integer, nullable=False)     # 금요일
+    sat = db.Column(db.Integer, nullable=False)     # 토요일
+    hol = db.Column(db.Integer, nullable=False)     # 공휴일(일요일 포함)
+    trend = db.Column(db.Integer, nullable=False)   # 네이버트렌드
+    sunny = db.Column(db.Integer, nullable=False)   # 맑음
+    cloudy = db.Column(db.Integer, nullable=False)  # 구름많음
+    rainy = db.Column(db.Integer, nullable=False)   # 비
+    snowy = db.Column(db.Integer, nullable=False)   # 눈
+
 db.create_all()
+
+## pickle로 저장된 LightGBM model 불러오기
 
 
 # root page
@@ -46,7 +68,14 @@ def root():
     doc = BeautifulSoup(req, "html.parser")
     time = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[0].text
     time2 = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[1].text.split(" ")[1]
-    return render_template("index.html", time=time, time2=time2)
+    weather = weather_api.weather(params={"version": "1",     # 서울시 송파구 풍납동의 좌표, 사실상 서울은
+                                  "lat": "37.53255",            # 모두 날씨가 같음
+                                  "lon": "127.10494"
+                                  })
+    tmax = weather["tmax"]
+    tmin = weather["tmin"]
+    weather = weather["weather"]
+    return render_template("index.html", time=time, time2=time2, tmax=tmax, tmin=tmin, weather=weather)
 
 # 게시판 page
 @app.route("/board/<int:page>")
@@ -215,5 +244,5 @@ def testing(val, val2, val3, val4):
 
 
 if __name__ == '__main__':
-    app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
-    # app.run(debug=True)
+    # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)
+    app.run(debug=True)
