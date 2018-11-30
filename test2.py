@@ -6,4 +6,4 @@ place = "nam"
 
 import dataEncoding
 data = dataEncoding.dataencoding(yea, mo, da, place)
-print(data)
+print(data['data'])

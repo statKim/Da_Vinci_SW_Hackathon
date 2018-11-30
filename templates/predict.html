@@ -149,7 +149,7 @@
     </div>
     </section>
 
-    <section class="portfolio" id="portfolio">
+    <section class="portfolio" id="portfolio2">
       <div class="portfolio-modal-dialog bg-primary">
         <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
           <i class="fa fa-3x fa-times"></i>
@@ -161,12 +161,13 @@
               <hr class="star-light mb-5">
               <br>
                  <h4>
-                   <div id="time"></div>
+                   <span id="time"></span>
                    <br>
-                   <div id="weather"></div>
+                   <span id="weather"></span>
                    <br><strong>
                    <div id="wea_status"></div>
-                 </strong>&nbsp;&nbsp;&nbsp;최고:<div id="tmax"></div> / 최저:<div id="tmin"></div></h4>
+                 </strong>&nbsp;&nbsp;&nbsp;최고:<span id="tmax"></span> / 최저:<span id="tmin"></span>
+                 </h4>
                   <br><br>
               <div id="rank"></div>
               <br><h2 >
@@ -178,43 +179,6 @@
         </div>
       </div>
     </section>
-
-
-
-<!--<section class="portfolio" id="portfolio">-->
-      <!--<div class="portfolio-modal-dialog bg-primary">-->
-        <!--<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">-->
-          <!--<i class="fa fa-3x fa-times"></i>-->
-        <!--</a>-->
-        <!--<div class="container text-center" style="padding-bottom: 100px;">-->
-          <!--<div class="row">-->
-            <!--<div class="col-lg-8 mx-auto">-->
-              <!--<h2 class="text-secondary text-uppercase mb-0">예상 혼잡도</h2>-->
-              <!--<hr class="star-light mb-5">-->
-              <!--<br>-->
-
-              <!--<table width="100%">-->
-                <!--<tr style="color: #2C3E50;">-->
-                  <!--<td><br><br>-->
-                    <!--&lt;!&ndash;<img class="img-fluid mb-5" src="../static/img/혼잡.png" alt="">&ndash;&gt;-->
-                    <!--<div id="rank"></div>-->
-                    <!--<br><h2 ><div id="status"></div></h2></td>-->
-                  <!--<td ><h3><div id="time"></div></h3><br><h3>-->
-                    <!--<div id="weather"></div>-->
-                    <!--&lt;!&ndash;<img class="img-fluid mb-5" src="../static/img/맑음.png" alt="">&ndash;&gt;-->
-                    <!--<strong><div id="wea_status"></div></strong></h3><h4><strong>최고기온 : <div id="tmax"></div><br>최저기온 :<div id="tmin"></div></strong></h4><td><h3></h3></td>-->
-                    <!--<br></td>-->
-
-                <!--</tr>-->
-              <!--</table>-->
-              <!--<br>-->
-
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-
-    <!--</section>-->
 
     <!-- Ajax javascript -->
     <script type="text/javascript">
@@ -237,11 +201,15 @@
       	    	var weather_img = '<img  src="' + JSON.parse(val)["weather"] + '">';
       	    	document.getElementById('weather').innerHTML = weather_img;
       	    	document.getElementById('status').innerHTML = JSON.parse(val)["pred"];
-      	    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
+      	    	//document.getElementById('result').value = JSON.parse(val)["pred"]; // input 태그에 값 넣기
       	    	document.getElementById('tmax').innerHTML = JSON.parse(val)["tmax"];
       	    	document.getElementById('tmin').innerHTML = JSON.parse(val)["tmin"];
       	    	document.getElementById('wea_status').innerHTML = JSON.parse(val)["wea_status"];
       	    	document.getElementById('time').innerHTML = JSON.parse(val)["time"];
+
+      	    	$('html,body').animate({
+                    scrollTop: $("#portfolio2").offset().top
+                }, 'slow');
       	    }
     	   };
 	  	}
@@ -257,8 +225,11 @@
             <h4 class="text-uppercase mb-4">문의/피드백</h4>
             <p class="lead mb-0">
               sjy115@naver.com<br>
-              sy55n789@naver.com<br>
+              syoon789@naver.com<br>
               hyunsung1021@gmail.com<br>
+              dkswl096@hanmail.net<br>
+              skgo1381@naver.com<br>
+              rhj4862@gmail.com
             </p>
           </div>
           <div class="col-md-4 mb-5 mb-lg-0">

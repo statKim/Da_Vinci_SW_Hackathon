@@ -41,7 +41,7 @@ class Comment(db.Model):
 
 # 혼잡도 예측 table(congest)
 class Congest(db.Model):
-    __tablename__ = "congest"
+    __tablename__ = "congests"
     id = db.Column(db.Integer, primary_key=True)    # id(사실상 순서 구분)
     date = db.Column(db.String, nullable=False)     # 혼잡도 알고싶은 날짜
     people = db.Column(db.Integer, nullable=False)  # 생활인구(response)
@@ -53,6 +53,7 @@ class Congest(db.Model):
     thu = db.Column(db.Integer, nullable=False)     # 목요일
     fri = db.Column(db.Integer, nullable=False)     # 금요일
     sat = db.Column(db.Integer, nullable=False)     # 토요일
+    sun = db.Column(db.Integer, nullable=False)     # 일요일
     trend = db.Column(db.Integer, nullable=False)   # 네이버트렌드
     sunny = db.Column(db.Integer, nullable=False)   # 맑음
     cloudy = db.Column(db.Integer, nullable=False)  # 구름많음
@@ -60,8 +61,6 @@ class Congest(db.Model):
     snowy = db.Column(db.Integer, nullable=False)   # 눈
 
 db.create_all()
-
-## pickle로 저장된 LightGBM model 불러오기
 
 
 # root page
@@ -72,16 +71,8 @@ def root():
     doc = BeautifulSoup(req, "html.parser")
     time = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[0].text
     time2 = doc.select(".openDiv .leftArea .timeInfo .time .txt > span")[1].text.split(" ")[1]
-    weather = weather_api.weather(params={"version": "1",     # 서울시 송파구 풍납동의 좌표, 사실상 서울은
-                                  "lat": "37.53255",            # 모두 날씨가 같음
-                                  "lon": "127.10494"
-                                  })
-    tmax = weather["tmax"]
-    tmin = weather["tmin"]
-    weather = weather["weather"]
-    # lightgbm 모델로 predict
 
-    return render_template("index.html", time=time, time2=time2, tmax=tmax, tmin=tmin, weather=weather)
+    return render_template("index.html", time=time, time2=time2)
 
 # 게시판 page
 @app.route("/board/<int:page>")
@@ -225,25 +216,25 @@ def predict():
     d = day + day_next  # 오늘부터 7일에 해당하는 일수
     return render_template("predict.html", month=month, day=day, day_next=day_next, danger=danger, d=d)
 
-# 혼잡도 예측 결과 페이지
-@app.route("/prediction", methods=["POST"]) # form태그랑 route 모두 post로 하면 post
-def prediction():
-    place = request.form["place"]
-    month = request.form["month"]
-    if int(month) == datetime.now().month:   # select 태그로 받아온 월이 이번달이면
-        day = request.form["day"]
-    else:
-        day = request.form["day_next"]
-    value = month + "\n" + day + "\n" + place
-    return value
-
-# Ajax test용
-@app.route("/ajaxtest")
-def ajaxtest():
-    now = datetime.now()
-    time = now.strftime("%Y.%m.%d %H:%M")
-
-    return render_template("ajaxTest.html")
+# # 혼잡도 예측 결과 페이지
+# @app.route("/prediction", methods=["POST"]) # form태그랑 route 모두 post로 하면 post
+# def prediction():
+#     place = request.form["place"]
+#     month = request.form["month"]
+#     if int(month) == datetime.now().month:   # select 태그로 받아온 월이 이번달이면
+#         day = request.form["day"]
+#     else:
+#         day = request.form["day_next"]
+#     value = month + "\n" + day + "\n" + place
+#     return value
+#
+# # Ajax test용
+# @app.route("/ajaxtest")
+# def ajaxtest():
+#     now = datetime.now()
+#     time = now.strftime("%Y.%m.%d %H:%M")
+#
+#     return render_template("ajaxTest.html")
 
 # 메인 페이지에서 Ajax 이용하여 비동기로 예측 결과 출력
 @app.route("/testing/<string:val>/<string:val2>/<string:val3>/<string:val4>")
@@ -312,81 +303,81 @@ def testing(val, val2, val3, val4):
     if place == "park":
         if y_pred < 20851:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 23378:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 24488:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
     if place == "lotte":
         if y_pred < 54092:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 60393:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 65424:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
     if place == "nam":
         if y_pred < 23801:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 30866:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 32208:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
     if place == "gyeongbok":
         if y_pred < 19469:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 21697:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 23005:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
     if place == "duksu":
         if y_pred < 49204:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 72569:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 76118:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
     elif place == "buk":
         if y_pred < 10571:
             pred = "한산"
-            img = "../static/img/c.png"
+            img = "../static/img/c1.png"
         elif y_pred < 12624:
             pred = "적정"
-            img = "../static/img/b.png"
+            img = "../static/img/b1.png"
         elif y_pred < 13075:
             pred = "다소혼잡"
-            img = "../static/img/a.png"
+            img = "../static/img/a1.png"
         else:
             pred = "혼잡"
-            img = "../static/img/s.png"
+            img = "../static/img/s1.png"
 
     if weather == 1:
         weather = "../static/img/sunny.png"
@@ -414,8 +405,14 @@ def testing(val, val2, val3, val4):
         "wea_status":wea_status,
         "time":time
     }
-    return json.dumps(data)
 
+    res = encode["data"]
+    # 결과값 DB에 저장
+    conjest = Congest(date=time, people=int(y_pred), hol=int(res[0]),mon=int(res[1]), tue=int(res[2]), wed=int(res[3]), thu=int(res[4]),fri=int(res[5]), sat=int(res[6]), sun=int(res[7]), trend=int(res[8]),sunny=int(res[9]), cloudy=int(res[10]), rainy=int(res[11]), snowy=int(res[12]))
+    db.session.add(conjest)
+    db.session.commit()
+   
+    return json.dumps(data)
 
 if __name__ == '__main__':
     # app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)), debug=True)

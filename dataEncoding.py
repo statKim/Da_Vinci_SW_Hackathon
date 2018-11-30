@@ -315,8 +315,6 @@ def dataencoding(yea, mo, da, place):
 
 
     data = pd.DataFrame([[hol, xf1, xf2, xf3, xf4, xf5, xf6, xf7, trend, sunny, cloudy, rainy, snowy]])
-    # print(data)
-    # weather =
 
 
     result = {

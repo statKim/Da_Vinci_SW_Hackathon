@@ -1,7 +1,7 @@
 ﻿import requests
 import json
 
-appkey = "edd40da6-5b28-44ab-8df2-7d80e24099f3"
+appkey = "6f435570-06be-43bb-a6d1-bb680ae39a25"
 
 #URL
 url_days = "https://api2.sktelecom.com/weather/forecast/6days"
