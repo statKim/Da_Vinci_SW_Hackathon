@@ -2,3 +2,6 @@ flask
 flask-sqlalchemy
 requests
 bs4
+lightgbm
+pandas
+numpy

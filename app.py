@@ -4,7 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
-import weather_api  # 기상청 API 사용하여 만든 사용자 정의 모듈
+import weather_api          # 기상청 API 사용하여 만든 사용자 정의 모듈
+import lightgbm as lgb      # 혼잡도 예측 모델 predict 위한 모듈 import
+import pandas as pd         # 혼잡도 예측 모델 predict 위한 모듈 import
+import dataEncoding
 
 app = Flask(__name__)
 
@@ -42,13 +45,14 @@ class Congest(db.Model):
     id = db.Column(db.Integer, primary_key=True)    # id(사실상 순서 구분)
     date = db.Column(db.String, nullable=False)     # 혼잡도 알고싶은 날짜
     people = db.Column(db.Integer, nullable=False)  # 생활인구(response)
+    hol = db.Column(db.Integer, nullable=False)     # 공휴일(일요일 포함)
+    sun = db.Column(db.Integer, nullable=False)	    # 일요일
     mon = db.Column(db.Integer, nullable=False)	    # 월요일
     tue = db.Column(db.Integer, nullable=False)     # 화요일
     wed = db.Column(db.Integer, nullable=False)     # 수요일
     thu = db.Column(db.Integer, nullable=False)     # 목요일
     fri = db.Column(db.Integer, nullable=False)     # 금요일
     sat = db.Column(db.Integer, nullable=False)     # 토요일
-    hol = db.Column(db.Integer, nullable=False)     # 공휴일(일요일 포함)
     trend = db.Column(db.Integer, nullable=False)   # 네이버트렌드
     sunny = db.Column(db.Integer, nullable=False)   # 맑음
     cloudy = db.Column(db.Integer, nullable=False)  # 구름많음
@@ -75,6 +79,8 @@ def root():
     tmax = weather["tmax"]
     tmin = weather["tmin"]
     weather = weather["weather"]
+    # lightgbm 모델로 predict
+
     return render_template("index.html", time=time, time2=time2, tmax=tmax, tmin=tmin, weather=weather)
 
 # 게시판 page
@@ -216,7 +222,8 @@ def predict():
         day = [d for d in range(day, day+7, 1)]
         day_next = day
         danger = False
-    return render_template("predict.html", month=month, day=day, day_next=day_next, danger=danger)
+    d = day + day_next  # 오늘부터 7일에 해당하는 일수
+    return render_template("predict.html", month=month, day=day, day_next=day_next, danger=danger, d=d)
 
 # 혼잡도 예측 결과 페이지
 @app.route("/prediction", methods=["POST"]) # form태그랑 route 모두 post로 하면 post
@@ -233,14 +240,181 @@ def prediction():
 # Ajax test용
 @app.route("/ajaxtest")
 def ajaxtest():
+    now = datetime.now()
+    time = now.strftime("%Y.%m.%d %H:%M")
+
     return render_template("ajaxTest.html")
 
 # 메인 페이지에서 Ajax 이용하여 비동기로 예측 결과 출력
 @app.route("/testing/<string:val>/<string:val2>/<string:val3>/<string:val4>")
 def testing(val, val2, val3, val4):
-    all_args = "서버값 받기 성공!!"
-    all_args = val + val2 + val3 + val4
-    return json.dumps({'status': all_args})
+    month = val
+    if month == datetime.now().month:
+        day = val2
+    else:
+        day = val3
+
+    # input 날짜 입력
+    yea = datetime.now().year
+    mo = month
+    da = day
+    if val4 == "롯데월드":
+        place = "lotte"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_lotte.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+    elif val4 == "어린이대공원":
+        place = "park"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_park.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+    elif val4 == "경복궁":
+        place = "gyeongbok"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_gyeong.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+    elif val4 == "덕수궁":
+        place = "duksu"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_duk.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+    elif val4 == "남산":
+        place = "nam"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_nam.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+    else:
+        place = "buk"
+        encode = dataEncoding.dataencoding(int(yea), int(mo), int(da), place)
+        data = encode["data"]
+        bst = lgb.Booster(model_file='model/model_buk.txt')
+        weather = encode["weather"]
+        tmax = encode["tmax"]
+        tmin = encode["tmin"]
+
+    y_pred = bst.predict(data)
+
+    if place == "park":
+        if y_pred < 20851:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 23378:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 24488:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+    if place == "lotte":
+        if y_pred < 54092:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 60393:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 65424:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+    if place == "nam":
+        if y_pred < 23801:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 30866:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 32208:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+    if place == "gyeongbok":
+        if y_pred < 19469:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 21697:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 23005:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+    if place == "duksu":
+        if y_pred < 49204:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 72569:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 76118:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+    elif place == "buk":
+        if y_pred < 10571:
+            pred = "한산"
+            img = "../static/img/c.png"
+        elif y_pred < 12624:
+            pred = "적정"
+            img = "../static/img/b.png"
+        elif y_pred < 13075:
+            pred = "다소혼잡"
+            img = "../static/img/a.png"
+        else:
+            pred = "혼잡"
+            img = "../static/img/s.png"
+
+    if weather == 1:
+        weather = "../static/img/sunny.png"
+        wea_status = "맑음"
+    elif weather == 2:
+        weather = "../static/img/cloudy.png"
+        wea_status = "흐림"
+    elif weather == 3:
+        weather = "../static/img/rainy.png"
+        wea_status = "비"
+    else:
+        weather = "../static/img/snowy.png"
+        wea_status = "눈"
+
+    if len(str(da)) == 1:
+        da = "0" + str(da)
+    time = str(yea) + "." + str(mo) + "." + da
+    data = {
+        "value":float(y_pred),
+        "pred":pred,
+        "img":img,
+        "weather":weather,
+        "tmax":tmax,
+        "tmin":tmin,
+        "wea_status":wea_status,
+        "time":time
+    }
+    return json.dumps(data)
 
 
 if __name__ == '__main__':

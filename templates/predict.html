@@ -146,90 +146,76 @@
             <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>
           </div>
         </div>
-      <div id="result"></div>
     </div>
-
-		<!--<div>-->
-        <!--<form method="post" action="/prediction"> &lt;!&ndash; 서버로 데이터 넘기는 form &ndash;&gt;-->
-		<!--<table align="center">-->
-		<!--	<tr><th align ="left">&emsp;날짜&emsp; </th>-->
-		<!--		<td>-->
-  <!--        <form name="select_month">-->
-  <!--          {% if danger == True %}-->
-              <!-- 상위 셀렉트 -->
-  <!--            <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">-->
-              <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
-  <!--              {% for m in month %}-->
-  <!--                <option value="{{ m }}">{{ m }}-->
-  <!--              {% endfor %}-->
-  <!--            </select>월&emsp;-->
-              <!-- 하위 셀렉트 1 -->
-  <!--            <select class="custom-select" id="day" name="day" style="display: ; width:40%;">-->
-              <!--<select id="day" name="day" style="display: ;">-->
-  <!--              {% for d in day %}-->
-  <!--                <option value="{{ d }}">{{ d }}</option>-->
-  <!--              {% endfor %}-->
-  <!--             </select>-->
-              <!-- 하위 셀렉트 2 -->
-  <!--            <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">-->
-              <!--<select id="day_next" name="day_next" style="display: none;">-->
-  <!--              {% for dn in day_next %}-->
-  <!--                <option value="{{ dn }}">{{ dn }}</option>-->
-  <!--              {% endfor %}-->
-  <!--            </select>일-->
-  <!--          {% else %}-->
-  <!--            <select class="custom-select" id="month" name="month" style="width:40%" onChange="showSub(this.options[this.selectedIndex].value);">-->
-              <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
-  <!--                <option value="{{ month[0] }}">{{ month[0] }}-->
-  <!--            </select>월&emsp;-->
-              <!-- 하위 셀렉트 1 -->
-  <!--            <select class="custom-select" id="day" name="day" style="display: ; width:40%;">-->
-              <!--<select id="day" name="day" style="display: ;">-->
-  <!--              {% for d in day %}-->
-  <!--                <option value="{{ d }}">{{ d }}</option>-->
-  <!--              {% endfor %}-->
-  <!--            </select>-->
-              <!-- 하위 셀렉트 2 -->
-  <!--            <select class="custom-select" id="day_next" name="day_next" style="display: none; width:40%;">-->
-              <!--<select id="day_next" name="day_next" style="display: none;">-->
-  <!--              {% for dn in day_next %}-->
-  <!--                <option value="{{ dn }}">{{ dn }}</option>-->
-  <!--              {% endfor %}-->
-  <!--            </select>일-->
-  <!--          {% endif %}-->
-  <!--        </form>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-		<!--	<tr><th align="left">&emsp;장소&emsp; </th>-->
-		<!--		<td>-->
-  <!--        <select id="place" name="place">-->
-  <!--          <option value="롯데월드">롯데월드</option>-->
-  <!--          <option value="어린이대공원">어린이대공원</option>-->
-  <!--          <option value="남산">남산</option>-->
-  <!--          <option value="덕수궁">덕수궁</option>-->
-  <!--          <option value="경복궁">경복궁</option>-->
-  <!--          <option value="북촌한옥마을">북촌한옥마을</option>-->
-  <!--        </select>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-		<!--	<tr>-->
-  <!--      <td colspan="2" align="center">-->
-  <!--        <br>-->
-  <!--        <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" onclick="ajaxReq()">예상!!</button>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-  <!--    <tr>-->
-  <!--      <td colspan="2" align="center">-->
-  <!--        <br>-->
-          <!--<input id="result" >-->
-  <!--        <div id="result"></div>-->
-  <!--      </td>-->
-  <!--    </tr>-->
-		<!--</table>-->
-        <!--</form>-->
-		<!--</div>-->
     </section>
-    
+
+    <section class="portfolio" id="portfolio">
+      <div class="portfolio-modal-dialog bg-primary">
+        <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+          <i class="fa fa-3x fa-times"></i>
+        </a>
+        <div class="container text-center" style="padding-bottom: 100px;">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h2 class="text-secondary text-uppercase mb-0">예상 혼잡도</h2>
+              <hr class="star-light mb-5">
+              <br>
+                 <h4>
+                   <div id="time"></div>
+                   <br>
+                   <div id="weather"></div>
+                   <br><strong>
+                   <div id="wea_status"></div>
+                 </strong>&nbsp;&nbsp;&nbsp;최고:<div id="tmax"></div> / 최저:<div id="tmin"></div></h4>
+                  <br><br>
+              <div id="rank"></div>
+              <br><h2 >
+              <div id="status"></div>
+            </h2>
+              <br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+<!--<section class="portfolio" id="portfolio">-->
+      <!--<div class="portfolio-modal-dialog bg-primary">-->
+        <!--<a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">-->
+          <!--<i class="fa fa-3x fa-times"></i>-->
+        <!--</a>-->
+        <!--<div class="container text-center" style="padding-bottom: 100px;">-->
+          <!--<div class="row">-->
+            <!--<div class="col-lg-8 mx-auto">-->
+              <!--<h2 class="text-secondary text-uppercase mb-0">예상 혼잡도</h2>-->
+              <!--<hr class="star-light mb-5">-->
+              <!--<br>-->
+
+              <!--<table width="100%">-->
+                <!--<tr style="color: #2C3E50;">-->
+                  <!--<td><br><br>-->
+                    <!--&lt;!&ndash;<img class="img-fluid mb-5" src="../static/img/혼잡.png" alt="">&ndash;&gt;-->
+                    <!--<div id="rank"></div>-->
+                    <!--<br><h2 ><div id="status"></div></h2></td>-->
+                  <!--<td ><h3><div id="time"></div></h3><br><h3>-->
+                    <!--<div id="weather"></div>-->
+                    <!--&lt;!&ndash;<img class="img-fluid mb-5" src="../static/img/맑음.png" alt="">&ndash;&gt;-->
+                    <!--<strong><div id="wea_status"></div></strong></h3><h4><strong>최고기온 : <div id="tmax"></div><br>최저기온 :<div id="tmin"></div></strong></h4><td><h3></h3></td>-->
+                    <!--<br></td>-->
+
+                <!--</tr>-->
+              <!--</table>-->
+              <!--<br>-->
+
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+    <!--</section>-->
+
     <!-- Ajax javascript -->
     <script type="text/javascript">
   		function ajaxReq() {
@@ -246,8 +232,16 @@
       		 if (this.readyState == 4 && this.status == 200) {
       	    	var val = this.responseText  //responseText가 데이터!!
       	    	//alert(val)
+      	    	var rank_img = '<img  src="' + JSON.parse(val)["img"] + '">';
+      	    	document.getElementById('rank').innerHTML = rank_img;
+      	    	var weather_img = '<img  src="' + JSON.parse(val)["weather"] + '">';
+      	    	document.getElementById('weather').innerHTML = weather_img;
+      	    	document.getElementById('status').innerHTML = JSON.parse(val)["pred"];
       	    	//document.getElementById('result').value = JSON.parse(val)["status"]; // input 태그에 값 넣기
-      	    	document.getElementById('result').innerHTML = JSON.parse(val)["status"]; // div에 값 넣기
+      	    	document.getElementById('tmax').innerHTML = JSON.parse(val)["tmax"];
+      	    	document.getElementById('tmin').innerHTML = JSON.parse(val)["tmin"];
+      	    	document.getElementById('wea_status').innerHTML = JSON.parse(val)["wea_status"];
+      	    	document.getElementById('time').innerHTML = JSON.parse(val)["time"];
       	    }
     	   };
 	  	}
