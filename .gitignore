@@ -4,6 +4,5 @@ __pycache__/
 .git/
 .c9/
 etc/
-modeluse_example.py
-test2.py
+test.py
 holi.csv

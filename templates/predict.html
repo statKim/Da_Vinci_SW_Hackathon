@@ -24,22 +24,21 @@
     <!-- Custom styles for this template -->
     <link href="../static/css/freelancer.min.css" rel="stylesheet">
 
-  <!-- 셀렉트 제어 -->
-  <script language = "javascript">
-    //상위 셀렉트로 하위 셀렉트 제어하기
-    function showSub(obj) {
-        f = document.forms[0];
-        if(obj == {{ month[0] }}) {
-            f.day.style.display = "";
-            f.day_next.style.display = "none";
-        } else {
-            f.day.style.display = "none";
-            f.day_next.style.display = "";
-         }
-    }
-  </script>
+    <!-- 셀렉트 제어 (어떤 것을 선택하느냐에 따라서 나오는 select 태그가 달라짐) -->
+    <script language = "javascript">
+      //상위 셀렉트로 하위 셀렉트 제어하기
+      function showSub(obj) {
+          f = document.forms[0];
+          if(obj == {{ month[0] }}) {
+              f.day.style.display = "";
+              f.day_next.style.display = "none";
+          } else {
+              f.day.style.display = "none";
+              f.day_next.style.display = "";
+           }
+      }
+    </script>
   </head>
-
 
   <body id="page-top">
 
@@ -180,7 +179,7 @@
       </div>
     </section>
 
-    <!-- Ajax javascript -->
+    <!-- Ajax javascript (예측 결과 띄우는 부분) -->
     <script type="text/javascript">
   		function ajaxReq() {
   		  var xhttp = new XMLHttpRequest();
@@ -201,12 +200,12 @@
       	    	var weather_img = '<img  src="' + JSON.parse(val)["weather"] + '">';
       	    	document.getElementById('weather').innerHTML = weather_img;
       	    	document.getElementById('status').innerHTML = JSON.parse(val)["pred"];
-      	    	//document.getElementById('result').value = JSON.parse(val)["pred"]; // input 태그에 값 넣기
       	    	document.getElementById('tmax').innerHTML = JSON.parse(val)["tmax"];
       	    	document.getElementById('tmin').innerHTML = JSON.parse(val)["tmin"];
       	    	document.getElementById('wea_status').innerHTML = JSON.parse(val)["wea_status"];
       	    	document.getElementById('time').innerHTML = JSON.parse(val)["time"];
 
+                // 버튼 클릭시 밑으로 내려가게 하는 기능
       	    	$('html,body').animate({
                     scrollTop: $("#portfolio2").offset().top
                 }, 'slow');
@@ -214,8 +213,6 @@
     	   };
 	  	}
   	</script>
-
-
 
     <!-- Footer -->
     <footer class="footer text-center">
