@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>게시판</title>
+    <title>예상혼잡도</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -195,9 +195,9 @@
       		 if (this.readyState == 4 && this.status == 200) {
       	    	var val = this.responseText  //responseText가 데이터!!
       	    	//alert(val)
-      	    	var rank_img = '<img  src="' + JSON.parse(val)["img"] + '">';
+      	    	var rank_img = '<img  src="' + JSON.parse(val)["img"] + '" width="60%" height="60%">';
       	    	document.getElementById('rank').innerHTML = rank_img;
-      	    	var weather_img = '<img  src="' + JSON.parse(val)["weather"] + '">';
+      	    	var weather_img = '<img src="' + JSON.parse(val)["weather"] + '" width="40%" height="40%">';
       	    	document.getElementById('weather').innerHTML = weather_img;
       	    	document.getElementById('status').innerHTML = JSON.parse(val)["pred"];
       	    	document.getElementById('tmax').innerHTML = JSON.parse(val)["tmax"];
