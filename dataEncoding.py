@@ -8,8 +8,8 @@ import weather_api      # 날씨API를 사용하는 사용자 정의 모듈 impo
 
 def dataencoding(mo, da, place):
     ## 네이버 트렌드 데이터 (최근7일간의 검색어 데이터)
-    client_id = "아이디"
-    client_secret = "시크릿"
+    client_id = "ID"
+    client_secret = "Secret"
     url = "https://openapi.naver.com/v1/datalab/search";
 
     today = str(date.today())
@@ -207,7 +207,10 @@ def dataencoding(mo, da, place):
         day_next = [d for d in range(1, 7 - (31 - day) + 1, 1)]
         day = [d for d in range(day, 31, 1)]
     elif (day >= 26) and (month[0] in d31):
-        month.append(now.month + 1)
+        if month[0] == 12:
+            month.append(1)
+        else:
+            month.append(now.month + 1)
         day_next = [d for d in range(1, 7 - (30 - day) + 1, 1)]
         day = [d for d in range(day, 32, 1)]
     elif (day >= 23) and (month[0] == 2):
@@ -218,7 +221,7 @@ def dataencoding(mo, da, place):
         day = [d for d in range(day, day + 7, 1)]
         day_next = day
     d = day + day_next
-    m = [now.month for i in range(len(day))] + [now.month+1 for i in range(len(day_next))]
+    m = [mo for i in range(len(day))] + [mo+1 if mo != 12 else 1 for i in range(len(day_next))]
     # m : day_next가 같게 나오지만 사실상 뒤쪽것은 안쓸거임!
 
     ## onehot encoding
