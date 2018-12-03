@@ -219,7 +219,10 @@ def predict():
         day_next = [d for d in range(1, 7-(31-day)+1, 1)]
         day = [d for d in range(day, 31, 1)]
     elif (day >= 26) and (month[0] in d31):     # 31일인 달의 경우
-        month.append(now.month+1)
+        if month[0] == 12:               # 오늘이 12월이면
+            month.apped(1)               # 다음달은 1월이기 때문에 1을 append
+        else:                            # 오늘이 12월이 아니면
+            month.append(now.month+1)    # 다음달 추가
         day_next = [d for d in range(1, 7-(30-day)+1, 1)]
         day = [d for d in range(day, 32, 1)]
     elif (day >= 23) and (month[0] == 2):       # 2월인 경우
@@ -250,19 +253,19 @@ def predict():
 # 혼잡도 예측페이지에서 Ajax 이용하여 비동기로 예측 결과 출력
 # 즉, 화면전환 없이 이 서버를 거치고 바로 현재 페이지에 출력!!
 # redirect 하는 경우와는 다름, redirect는 새로고침과 같은 일시적인 화면전환이 일어나지만 Ajax는 전혀 화면전환이 없음
-@app.route("/testing/<string:val>/<string:val2>/<string:val3>/<string:val4>")   # 입력된 월, 일, 장소 데이터 가져옴
-def testing(val, val2, val3, val4):
-    month = val
+@app.route("/testing/<int:month>/<int:day>/<int:day_next>/<string:place>")   # 입력된 월, 일, 장소 데이터 가져옴
+def testing(month, day, day_next, place):
     if month == datetime.now().month:   # 이번달일 경우
-        day = val2
+        day = day
     else:
-        day = val3
+        day = day_next
+    # app.logger.debug(month)
+    # app.logger.debug(day)
 
     # input 날짜 입력
-    yea = datetime.now().year
     mo = month
     da = day
-    if val4 == "롯데월드":
+    if place == "롯데월드":
         place = "lotte"
         encode = dataEncoding.dataencoding(int(mo), int(da), place)
         data = encode["data"]
@@ -270,7 +273,7 @@ def testing(val, val2, val3, val4):
         weather = encode["weather"]
         tmax = encode["tmax"]
         tmin = encode["tmin"]
-    elif val4 == "어린이대공원":
+    elif place == "어린이대공원":
         place = "park"
         encode = dataEncoding.dataencoding(int(mo), int(da), place)
         data = encode["data"]
@@ -278,7 +281,7 @@ def testing(val, val2, val3, val4):
         weather = encode["weather"]
         tmax = encode["tmax"]
         tmin = encode["tmin"]
-    elif val4 == "경복궁":
+    elif place == "경복궁":
         place = "gyeongbok"
         encode = dataEncoding.dataencoding(int(mo), int(da), place)
         data = encode["data"]
@@ -286,7 +289,7 @@ def testing(val, val2, val3, val4):
         weather = encode["weather"]
         tmax = encode["tmax"]
         tmin = encode["tmin"]
-    elif val4 == "덕수궁":
+    elif place == "덕수궁":
         place = "duksu"
         encode = dataEncoding.dataencoding(int(mo), int(da), place)
         data = encode["data"]
@@ -294,7 +297,7 @@ def testing(val, val2, val3, val4):
         weather = encode["weather"]
         tmax = encode["tmax"]
         tmin = encode["tmin"]
-    elif val4 == "남산":
+    elif place == "남산":
         place = "nam"
         encode = dataEncoding.dataencoding(int(mo), int(da), place)
         data = encode["data"]
@@ -393,7 +396,7 @@ def testing(val, val2, val3, val4):
         else:
             pred = "혼잡"
             img = "../static/img/s1.png"
-    
+
     # 해당 날짜에 대응되는 날씨 이미지와 단어 출력하기 위해
     if weather == 1:
         weather = "../static/img/sunny.png"
@@ -408,20 +411,22 @@ def testing(val, val2, val3, val4):
         weather = "../static/img/snowy.png"
         wea_status = "눈"
 
+    if (datetime.now().month == 12) & (mo == 1):    # 오늘은 12월인데 예측하고 싶은 날은 내년 1월일 때
+        year = datetime.now().year + 1
     if len(str(da)) == 1:   # 1~9일인 경우에는 "09"로 표현하기 위함
         da = "0" + str(da)
-    time = str(yea) + "." + str(mo) + "." + da  # ex) 2018.11.30
-    
+    time = str(year) + "." + str(mo) + "." + da  # ex) 2018.11.30
+
     # 위에서 정리한 데이터를 묶어서 json 형태로 값을 서버에서 보내줌
     data = {
-        "value":float(y_pred),      # 예측값
-        "pred":pred,                # 예측값에 해당하는 단어 (ex) 한산)
-        "img":img,                  # 단계로 구분된 예측값에 해당하는 이미지
-        "weather":weather,          # 날씨
-        "tmax":tmax,                # 최고기온
-        "tmin":tmin,                # 최저기온
-        "wea_status":wea_status,    # 날씨 상태 (ex) 구름많음)
-        "time":time                 # 날짜
+        "value": float(y_pred),      # 예측값
+        "pred": pred,                # 예측값에 해당하는 단어 (ex) 한산)
+        "img": img,                  # 단계로 구분된 예측값에 해당하는 이미지
+        "weather": weather,          # 날씨
+        "tmax": tmax,                # 최고기온
+        "tmin": tmin,                # 최저기온
+        "wea_status": wea_status,    # 날씨 상태 (ex) 구름많음)
+        "time": time                 # 날짜
     }
 
     res = encode["data"]    # input 데이터, DB에 저장하기 위해
@@ -430,7 +435,7 @@ def testing(val, val2, val3, val4):
     conjest = Congest(date=time, people=int(y_pred), hol=int(res[0]),mon=int(res[1]), tue=int(res[2]), wed=int(res[3]), thu=int(res[4]),fri=int(res[5]), sat=int(res[6]), sun=int(res[7]), trend=int(res[8]),sunny=int(res[9]), cloudy=int(res[10]), rainy=int(res[11]), snowy=int(res[12]))
     db.session.add(conjest)
     db.session.commit()
-   
+
     return json.dumps(data)     # data를 json형태로 보냄
 
 

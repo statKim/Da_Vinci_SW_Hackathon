@@ -1,6 +1,6 @@
 ﻿import requests
 
-appkey = "키값"
+appkey = "API키"
 
 # URL
 url_days = "https://api2.sktelecom.com/weather/forecast/6days"

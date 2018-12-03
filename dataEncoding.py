@@ -9,7 +9,7 @@ import weather_api      # 날씨API를 사용하는 사용자 정의 모듈 impo
 def dataencoding(mo, da, place):
     ## 네이버 트렌드 데이터 (최근7일간의 검색어 데이터)
     client_id = "아이디"
-    client_secret = "비밀번호"
+    client_secret = "시크릿"
     url = "https://openapi.naver.com/v1/datalab/search";
 
     today = str(date.today())
@@ -199,8 +199,8 @@ def dataencoding(mo, da, place):
 
     d30 = [4, 6, 9, 11]
     d31 = [1, 3, 5, 7, 8, 10, 12]
-    month = [mo]
-    day = da
+    month = [now.month]
+    day = now.day
 
     if (day >= 25) and (month[0] in d30):  # 오늘부터 7일 이후까지 보여줄건데 30일이 넘어갈 경우
         month.append(now.month + 1)

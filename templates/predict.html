@@ -81,29 +81,29 @@
           <label for="month" class="col-sm-2 col-form-label" align="right"><h4>날짜</h4></label>
           <div class="col-sm-10" >
             <form name="select_month" method="post" action="/prediction">
-              {% if danger == True %}
-                <!-- 상위 셀렉트 -->
-                <select class="custom-select" id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);" style="width:30%;">
-                <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
-                  {% for m in month %}
-                    <option value="{{ m }}">{{ m }}
-                  {% endfor %}
-                </select>&emsp;월&emsp;
-                <!-- 하위 셀렉트 1 -->
-                <select class="custom-select" id="day" name="day" style="display: ; width:30%;">
-                <!--<select id="day" name="day" style="display: ;">-->
-                  {% for d in day %}
-                    <option value="{{ d }}">{{ d }}</option>
-                  {% endfor %}
-                 </select>
-                <!-- 하위 셀렉트 2 -->
-                <select class="custom-select" id="day_next" name="day_next" style="display: none; width:30%;">
-                <!--<select id="day_next" name="day_next" style="display: none;">-->
-                  {% for dn in day_next %}
-                    <option value="{{ dn }}">{{ dn }}</option>
-                  {% endfor %}
-                </select>&emsp;일
-              {% else %}
+              <!--{% if danger == True %}-->
+                <!--&lt;!&ndash; 상위 셀렉트 &ndash;&gt;-->
+                <!--<select class="custom-select" id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);" style="width:30%;">-->
+                <!--&lt;!&ndash;<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">&ndash;&gt;-->
+                  <!--{% for m in month %}-->
+                    <!--<option value="{{ m }}">{{ m }}-->
+                  <!--{% endfor %}-->
+                <!--</select>&emsp;월&emsp;-->
+                <!--&lt;!&ndash; 하위 셀렉트 1 &ndash;&gt;-->
+                <!--<select class="custom-select" id="day" name="day" style="display: ; width:30%;">-->
+                <!--&lt;!&ndash;<select id="day" name="day" style="display: ;">&ndash;&gt;-->
+                  <!--{% for d in day %}-->
+                    <!--<option value="{{ d }}">{{ d }}</option>-->
+                  <!--{% endfor %}-->
+                 <!--</select>-->
+                <!--&lt;!&ndash; 하위 셀렉트 2 &ndash;&gt;-->
+                <!--<select class="custom-select" id="day_next" name="day_next" style="display: none; width:30%;">-->
+                <!--&lt;!&ndash;<select id="day_next" name="day_next" style="display: none;">&ndash;&gt;-->
+                  <!--{% for dn in day_next %}-->
+                    <!--<option value="{{ dn }}">{{ dn }}</option>-->
+                  <!--{% endfor %}-->
+                <!--</select>&emsp;일-->
+              <!--{% else %}-->
                 <select class="custom-select" id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);" style="width:30%;">
                 <!--<select id="month" name="month" onChange="showSub(this.options[this.selectedIndex].value);">-->
                     <option value="{{ month[0] }}">{{ month[0] }}
@@ -122,7 +122,7 @@
                     <option value="{{ dn }}">{{ dn }}</option>
                   {% endfor %}
                 </select>일
-              {% endif %}
+              <!--{% endif %}-->
             </form>
           </div>
         </div>
@@ -189,6 +189,7 @@
         url = url + "/" + document.getElementById('day_next').value + "/" + document.getElementById('place').value
   		  xhttp.open("GET", url, true); //true : 비동기
   		  xhttp.send();
+  		  //alert(url)
   
           // 서버에서 값 받아오는 함수 => xhttp.send() 이후에 자동 실행됨
     	   xhttp.onreadystatechange = function() {
