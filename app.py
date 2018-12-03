@@ -413,6 +413,8 @@ def testing(month, day, day_next, place):
 
     if (datetime.now().month == 12) & (mo == 1):    # 오늘은 12월인데 예측하고 싶은 날은 내년 1월일 때
         year = datetime.now().year + 1
+    else:
+        year = datetime.now().year
     if len(str(da)) == 1:   # 1~9일인 경우에는 "09"로 표현하기 위함
         da = "0" + str(da)
     time = str(year) + "." + str(mo) + "." + da  # ex) 2018.11.30
