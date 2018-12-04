@@ -260,10 +260,10 @@ def dataencoding(mo, da, place):
 
     # 공휴일 & 요일 onehot
     holi = pd.read_csv('data/holi.csv', encoding='CP949')
-    holi_list = holi.iloc[:,2]
+    holi_list = holi.iloc[:, 2]
 
     if int(target_origin) in holi_list.tolist():    # 공휴일 확인
-        hol, xf1, xf2, xf3, xf4, xf5, xf6, xf7 = 0, 0, 0, 0, 0, 0, 0, 0
+        hol, xf1, xf2, xf3, xf4, xf5, xf6, xf7 = 1, 0, 0, 0, 0, 0, 0, 0
     else:
         # 요일 onehot
         if week == 0:

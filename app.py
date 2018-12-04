@@ -417,7 +417,7 @@ def testing(month, day, day_next, place):
         year = datetime.now().year
     if len(str(da)) == 1:   # 1~9일인 경우에는 "09"로 표현하기 위함
         da = "0" + str(da)
-    time = str(year) + "." + str(mo) + "." + da  # ex) 2018.11.30
+    time = str(year) + "." + str(mo) + "." + str(da)  # ex) 2018.11.30
 
     # 위에서 정리한 데이터를 묶어서 json 형태로 값을 서버에서 보내줌
     data = {
