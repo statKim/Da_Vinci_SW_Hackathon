@@ -62,7 +62,7 @@ $ python
   - **templates** 폴더 : 우리가 web에 띄울 페이지 파일 (**html**) 들은 모두 이 폴더 안에 있어야 합니다!!
   - **static** 폴더 : html 파일에 적용할 **CSS**, **JS** 등의 파일들은 모두 이 폴더 안에 있어야 합니다!!
 
-![git_status_sequence](img/basic_form.PNG)
+![git_status_sequence](img/basic_form.png)
 
 - 간단하게 구현해서 되는지 확인해보기
   - **app.py**
@@ -88,7 +88,7 @@ if __name__ == '__main__':	# app.py가 main 프로그램인지 확인하는 기�
 
 - 실행 결과 화면 (좌측 상단)
 
-  ![git_status_sequence](img/hello.PNG)
+  ![git_status_sequence](img/hello.png)
 
   > 참고로 본인의 Window 계정명(or 컴퓨터 이름)이 **한글**일 경우에는 **'utf-8' decoder error**가 뜨고 실행되지 않습니다.
 
@@ -193,7 +193,7 @@ app.run()
 
 - "http://127.0.0.1:5000/"
 
-![git_status_sequence](img/hello.PNG)
+![git_status_sequence](img/hello.png)
 
 - "http://127.0.0.1:5000/다섯명"
 

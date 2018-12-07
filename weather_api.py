@@ -31,45 +31,40 @@ def weather(params):
     sky.append(weather1["weather"]["summary"][0]["today"]["sky"]["name"])
     sky.append(weather1["weather"]["summary"][0]["tomorrow"]["sky"]["name"])
 
+    # 일자별 최고기온
+    tmax = []
+    tmax.append(weather1["weather"]["summary"][0]["today"]["temperature"]["tmax"])
+    tmax.append(weather1["weather"]["summary"][0]["tomorrow"]["temperature"]["tmax"])
+
+    # 일자별 최저기온
+    tmin = []
+    tmin.append(weather1["weather"]["summary"][0]["today"]["temperature"]["tmin"])
+    tmin.append(weather1["weather"]["summary"][0]["tomorrow"]["temperature"]["tmin"])
+    
+    # 2일 ~ 10일의 구름양, 최저,최고기온 append
     for i in range(2, 11, 1):
         sky.append(weather2['weather']["forecast6days"][0]["sky"]["pmName%dday"%i])
-    # print(sky)
-
+        tmax.append(weather2['weather']["forecast6days"][0]["temperature"]["tmax%dday" % i])
+        tmin.append(weather2['weather']["forecast6days"][0]["temperature"]["tmin%dday" % i])
+    
+    # 구름양을 4가지로 분류
     weather = []
     for data in sky:
         if data == "맑음" or data == "구름조금":
             weather.append(1)
         elif data == "구름많음" or data == "흐림":
             weather.append(2)
-        elif (data == "흐리고 비" or data == "구름많고 비") or (data == "소나기" or data == "비 또는 눈"):
+        elif (data == "흐리고 비" or data == "구름많고 비" or data == "소나기" or data == "비 또는 눈"):
             weather.append(3)
         else:
             weather.append(4)
-    # print(weather)
-
-    # 일자별 최고기온
-    tmax = []
-    tmax.append(weather1["weather"]["summary"][0]["today"]["temperature"]["tmax"])
-    tmax.append(weather1["weather"]["summary"][0]["tomorrow"]["temperature"]["tmax"])
-
-    for i in range(2, 11, 1):
-        tmax.append(weather2['weather']["forecast6days"][0]["temperature"]["tmax%dday" % i])
-    # print(tmax)
-
-    # 일자별 최저기온
-    tmin = []
-    tmin.append(weather1["weather"]["summary"][0]["today"]["temperature"]["tmin"])
-    tmin.append(weather1["weather"]["summary"][0]["tomorrow"]["temperature"]["tmin"])
-
-    for i in range(2, 11, 1):
-        tmin.append(weather2['weather']["forecast6days"][0]["temperature"]["tmin%dday" % i])
-    # print(tmin)
-
+            
     result = {
         "weather": weather,
         "tmax": tmax,
         "tmin": tmin
     }
+    
     return result
 
 # 오늘부터 +10일 까지 총 11개의 데이터
