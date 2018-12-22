@@ -1,3 +1,5 @@
+
+
 # Da Vinci SW Hackathon (2018)
 
 
@@ -31,7 +33,30 @@ pip install -r requirments.txt
 - **static/** : CSS, JS, Image 파일 등을 모아놓은 폴더
 - **model/** : LightGBM으로 training한 result 객체 폴더
 - **data/** : data를 전처리하는 R code
-- **flask_basic/** : 간단한 flask 사용법 등을 설명
 - **weather_api.py** : T developers의 날씨 API를 이용해 날씨정보를 가져오는 사용자 정의 모듈
 - **dataEncoding.py** : LightGBM model로 혼잡도를 예측하기 위한 데이터로 변환시키는 사용자 정의 모듈
 - **myapp.db** : sqlite3를 이용해 구축한 DB파일
+
+
+
+### 시연
+
+![image](image/demo1.png)
+
+![image](image/demo2.png)
+
+![image](image/demo3.png)
+
+![image](image/demo4.png)
+
+![image](image/demo5.png)
+
+![image](image/demo6.png)
+
+![image](image/demo7.png)
+
+![image](image/demo8.png)
+
+![image](image/demo9.png)
+
+![image](image/demo10.png)
