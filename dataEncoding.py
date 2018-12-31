@@ -8,7 +8,7 @@ import weather_api      # 날씨API를 사용하는 사용자 정의 모듈 impo
 def dataencoding(mo, da, place):
     ## 네이버 트렌드 데이터 (최근7일간의 검색어 데이터)
     client_id = "ID"
-    client_secret = "Secret"
+    client_secret = "비밀번호"
     url = "https://openapi.naver.com/v1/datalab/search";
 
     today = str(date.today())
